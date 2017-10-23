@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/newtoolMTSA/src/main/java"/>
+    	<classpathentry kind="src" path="/newtoolMTSA/src/main/resources"/>
+    	<classpathentry kind="src" path="/newtoolMTSA/src/test/java"/>
+    	<classpathentry exported="true" kind="lib" path="C:/Users/Fabian/Documents/lnahabedian-mtsa-26803a183c10/lnahabedian-mtsa-26803a183c10/maven-root/mtsa" sourcepath="C:/Users/Fabian/Documents/lnahabedian-mtsa-26803a183c10/lnahabedian-mtsa-26803a183c10/maven-root/mtsa/src/main/java"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
