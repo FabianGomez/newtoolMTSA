@@ -39,7 +39,7 @@ public class ModelForm {
     public ModelForm(Map mapParam, final String filename){
         final Map map = mapParam;
 
-        final ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath*:newToolMtsa-context.xml","classpath*:ltsa-context.xml");
+        final ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath*:newtool-context.xml");
 
         final SchedulerFactory schedulerFactory =  applicationContext.getBean(SchedulerFactory.class);
         final EnactorFactory enactorFactory = applicationContext.getBean(EnactorFactory.class);
@@ -150,15 +150,15 @@ public class ModelForm {
                         List<String> enactorsNames = enactorFactory.getEnactorNames();
                         int indexEnactorGridEnvironment = -1;
                         for(int index=0;index < enactorsNames.size();index++)
-                            if(enactorsNames.get(index) == GridEnvironmentSimulation.ENACTORNAME)
+                            if(enactorsNames.get(index).equals(GridEnvironmentSimulation.ENACTORNAME))
                                 indexEnactorGridEnvironment = index;
-                        /*if (indexEnactorGridEnvironment == -1) {
+                        if (indexEnactorGridEnvironment == -1) {
                             JOptionPane.showMessageDialog(null, "Enactor 'GridSimulationEnactor' not found", "Error", 1, null);
                             return;
-                        }*/
+                        }
 
                         enactmentOptions.enactors = new LinkedList();
-                        enactmentOptions.enactors.add(GridEnvironmentSimulation.ENACTORNAME);
+                        enactmentOptions.enactors.add(enactorsNames.get(indexEnactorGridEnvironment));
                         simulation.runSimulation(controller, applicationContext, enactmentOptions);
                     }else{
                         JOptionPane.showMessageDialog(null, "There is no controller done", "Error", 1, null);

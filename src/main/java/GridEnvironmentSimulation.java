@@ -45,25 +45,23 @@ public class GridEnvironmentSimulation<State, Action> extends
     protected void primitiveHandleTransitionEvent(TransitionEvent<Action> transitionEvent) throws Exception {
 
         if (transitionEvent.getAction().equals(goE)) {
-            startingToMove(0,-1);
-        } else if (transitionEvent.getAction().equals(goW)) {
             startingToMove(0,1);
+        } else if (transitionEvent.getAction().equals(goW)) {
+            startingToMove(0,-1);
         } else if (transitionEvent.getAction().equals(goN)) {
             startingToMove(-1,0);
         } else if (transitionEvent.getAction().equals(goS)) {
             startingToMove(1,0);
         } else if (transitionEvent.getAction().equals(detourE)) {
-            finishingToMove(0,-1);
-        } else if (transitionEvent.getAction().equals(detourW)) {
             finishingToMove(0,1);
+        } else if (transitionEvent.getAction().equals(detourW)) {
+            finishingToMove(0,-1);
         } else if (transitionEvent.getAction().equals(detourN)) {
             finishingToMove(-1,0);
         } else if (transitionEvent.getAction().equals(detourS)) {
             finishingToMove(1,0);
         } else if (transitionEvent.getAction().equals(nodetour)) {
             finishingToMove(0,0);
-        } else if (transitionEvent.getAction().equals(nodetour)) {
-            endingToMove();
         }
 
         simulationWindow.repaint();
@@ -75,9 +73,6 @@ public class GridEnvironmentSimulation<State, Action> extends
     }
     private void finishingToMove(int vertical, int horizontal){
         simulationWindow.finishingToMove(vertical,horizontal);
-    }
-    private void endingToMove(){
-        simulationWindow.endingToMove();
     }
 
     @Override

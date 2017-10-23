@@ -8,37 +8,53 @@ public class GridEnviromentSimulationUI extends JFrame{
 
     CellPane actual;
     CellPane startingToMove;
-    CellPane endingToMove;
 
     private static final Color STARTINGCOLOR =  Color.getHSBColor(102,25,61);
     private static final Color ACTUALCOLOR =  Color.getHSBColor(99,44,44);
-    private static final Color ENDINGCOLOR =  Color.getHSBColor(102,25,61);
 
 
     public GridEnviromentSimulationUI(){
 
-        Map map = MapParser.parse(Map.TEMPPATH);
-        grid = new Grid(map,false);
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception ex) {
+                }
+                frame = new JFrame("MTSA TOOL");
+                frame.setLayout(new BorderLayout());
+                Map map = MapParser.parse(Map.TEMPPATH);
+                grid = new Grid(map,false);
+                actual = grid.getCell(map.getInitialCell().getRow(), map.getInitialCell().getColumn());
+                gridPanel = grid;
+                frame.add(gridPanel);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+                frame.setVisible(true);
+            }
+        });
 
-        gridPanel = grid;
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setSize(800, 300);
         setLayout(new BorderLayout(5,5));
         add(gridPanel, BorderLayout.NORTH);
+
+
+
         repaint();
     }
 
     public void startingToMove(int vertical, int horizontal){
-        startingToMove = grid.getCell(vertical,horizontal);
+        actual.endMomentarilyPaint();
+        startingToMove = grid.getCell(  actual.getCell().getRow() + vertical, actual.getCell().getColumn() + horizontal);
         startingToMove.startMomentarilyPaint(STARTINGCOLOR);
     }
+
     public void finishingToMove(int vertical, int horizontal){
-        endingToMove = grid.getCell(vertical,horizontal);
         startingToMove.endMomentarilyPaint();
-        endingToMove.startMomentarilyPaint(ENDINGCOLOR);
-    }
-    public void endingToMove(){
-        actual = endingToMove;
+        actual = grid.getCell(startingToMove.getCell().getRow()+ vertical, startingToMove.getCell().getColumn()+ horizontal);
         actual.startMomentarilyPaint(ACTUALCOLOR);
     }
+
 }
