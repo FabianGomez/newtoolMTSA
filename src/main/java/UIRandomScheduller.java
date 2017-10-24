@@ -22,9 +22,9 @@ import java.util.Set;
 
 public class UIRandomScheduller<State, Action> extends RandomController<State, Action> {
 
-	private UIControllerGui uiControllerGui = null;
+	public UIControllerGui uiControllerGui = null;
 	private Logger logger = LogManager.getLogger(TakeFirstController.class.getName());
-	private List<Action> optUnControllableActions;
+	public List<Action> optUnControllableActions;
 
 
 	public UIRandomScheduller(String name, LTS<State, Action> lts,
@@ -72,7 +72,7 @@ public class UIRandomScheduller<State, Action> extends RandomController<State, A
 		}
 	}
 
-	private void updateInterface()
+	public void updateInterface()
 	{
 		if (this.uiControllerGui == null) 
 		{
@@ -102,7 +102,7 @@ public class UIRandomScheduller<State, Action> extends RandomController<State, A
 		this.uiControllerGui.setVisible(true);
 	}
 	
-	private void fireAction(String name)
+	public void fireAction(String name)
 	{
 		if (this.optUnControllableActions == null) return;
 	

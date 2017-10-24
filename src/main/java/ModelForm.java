@@ -139,26 +139,37 @@ public class ModelForm {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if(controller != null){
-
                         map.saveTemp();
 
                         MTSAEnactmentSimulation simulation = new MTSAEnactmentSimulation();
                         EnactmentOptions enactmentOptions = new EnactmentOptions();
 
+                        //Set the Scheduller
                         List<String> schedulerNames = schedulerFactory.getSchedulersList();
-                        enactmentOptions.scheduler = schedulerNames.get(4);
+                        int indexSchedullerGridEnvironment = -1;
+                        for(int index=0;index < schedulerNames.size();index++)
+                            if(schedulerNames.get(index).equals(GridSimulationAdaptedUIRandomScheduller.SCHEDULLERNAME))
+                                indexSchedullerGridEnvironment = index;
+                        if (indexSchedullerGridEnvironment == -1) {
+                            JOptionPane.showMessageDialog(null, "Scheduller 'GridSimulationAdaptedUIRandomScheduller' not found", "Error", 1, null);
+                            return;
+                        }
+                        enactmentOptions.scheduler = schedulerNames.get(indexSchedullerGridEnvironment);
+
+                        //Set the Enactor
                         List<String> enactorsNames = enactorFactory.getEnactorNames();
                         int indexEnactorGridEnvironment = -1;
                         for(int index=0;index < enactorsNames.size();index++)
-                            if(enactorsNames.get(index).equals(GridEnvironmentSimulation.ENACTORNAME))
+                            if(enactorsNames.get(index).equals(GridEnvironmentSimulationEnactor.ENACTORNAME))
                                 indexEnactorGridEnvironment = index;
                         if (indexEnactorGridEnvironment == -1) {
                             JOptionPane.showMessageDialog(null, "Enactor 'GridSimulationEnactor' not found", "Error", 1, null);
                             return;
                         }
-
                         enactmentOptions.enactors = new LinkedList();
                         enactmentOptions.enactors.add(enactorsNames.get(indexEnactorGridEnvironment));
+
+
                         simulation.runSimulation(controller, applicationContext, enactmentOptions);
                     }else{
                         JOptionPane.showMessageDialog(null, "There is no controller done", "Error", 1, null);

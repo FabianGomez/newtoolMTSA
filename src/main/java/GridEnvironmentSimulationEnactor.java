@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * Created by lnahabedian on 18/07/16.
  */
-public class GridEnvironmentSimulation<State, Action> extends
+public class GridEnvironmentSimulationEnactor<State, Action> extends
         Enactor<State, Action> {
 
     // controllable
@@ -27,7 +27,7 @@ public class GridEnvironmentSimulation<State, Action> extends
 
     private GridEnviromentSimulationUI simulationWindow;
 
-    public GridEnvironmentSimulation(String name, Action goE, Action goW, Action goN, Action goS, Action detourE, Action detourW, Action detourN, Action detourS, Action nodetour, Action arrive) {
+    public GridEnvironmentSimulationEnactor(String name, Action goE, Action goW, Action goN, Action goS, Action detourE, Action detourW, Action detourN, Action detourS, Action nodetour, Action arrive) {
         super(name);
         this.goE = goE;
         this.goW = goW;

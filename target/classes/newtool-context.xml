@@ -12,7 +12,7 @@
 
     <import resource="classpath*:ltsa-context.xml"/>
 
-    <bean id="GridSimulationEnactor" class="GridEnvironmentSimulation">
+    <bean id="GridSimulationEnactor" class="GridEnvironmentSimulationEnactor">
         <constructor-arg index="0" value="GridSimulationEnactor"/>
 
         <constructor-arg index="1" value="go.e"/>
@@ -29,6 +29,10 @@
 
     <bean id="UIRandomScheduller" class="UIRandomScheduller">
         <constructor-arg index="0" value="UIRandomScheduller"/>
+    </bean>
+
+    <bean id="GridSimulationAdaptedUIRandomScheduller" class="GridSimulationAdaptedUIRandomScheduller">
+        <constructor-arg index="0" value="GridSimulationAdaptedUIRandomScheduller"/>
     </bean>
 
 </beans>
