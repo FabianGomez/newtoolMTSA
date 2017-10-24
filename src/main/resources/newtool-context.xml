@@ -26,6 +26,10 @@
         <constructor-arg index="9" value="nodetour"/>
         <constructor-arg index="10" value="arrive"/>
     </bean>
-	
+
+    <bean id="UIRandomScheduller" class="UIRandomScheduller">
+        <constructor-arg index="0" value="UIRandomScheduller"/>
+    </bean>
+
 </beans>
 
