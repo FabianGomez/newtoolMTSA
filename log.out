@@ -1,7 +1,7 @@
 Adding [systemProperties] PropertySource with lowest search precedence
 Adding [systemEnvironment] PropertySource with lowest search precedence
 Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@60260780: startup date [Mon Oct 23 16:43:38 KST 2017]; root of context hierarchy
+Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7066ddd: startup date [Tue Oct 24 10:06:54 KST 2017]; root of context hierarchy
 Adding [systemProperties] PropertySource with lowest search precedence
 Adding [systemEnvironment] PropertySource with lowest search precedence
 Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
@@ -25,7 +25,7 @@ Loading bean definitions
 Loaded 14 bean definitions from location pattern [classpath*:ltsa-context.xml]
 Imported 14 bean definitions from URL location [classpath*:ltsa-context.xml]
 Loaded 21 bean definitions from location pattern [classpath*:newtool-context.xml]
-Bean factory for org.springframework.context.support.ClassPathXmlApplicationContext@60260780: org.springframework.beans.factory.support.DefaultListableBeanFactory@3f3b3bcf: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,ARDrone,enviromentChange,ARDroneII,enviromentChangeII,ARDroneUpdatingController,PainterEnvironment,PainterEnvironmentSimulation,counterEnactor,enactorFactory,controllerScheduler,randomScheduler,UpdateControllerScheduler,UIController,schedullerFactory,GridSimulationEnactor]; root of factory hierarchy
+Bean factory for org.springframework.context.support.ClassPathXmlApplicationContext@7066ddd: org.springframework.beans.factory.support.DefaultListableBeanFactory@7a091f6c: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,ARDrone,enviromentChange,ARDroneII,enviromentChangeII,ARDroneUpdatingController,PainterEnvironment,PainterEnvironmentSimulation,counterEnactor,enactorFactory,controllerScheduler,randomScheduler,UpdateControllerScheduler,UIController,schedullerFactory,GridSimulationEnactor]; root of factory hierarchy
 Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
 Creating instance of bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
 Eagerly caching bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor' to allow for resolving potential circular references
@@ -43,9 +43,9 @@ Creating shared instance of singleton bean 'org.springframework.context.annotati
 Creating instance of bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
 Eagerly caching bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor' to allow for resolving potential circular references
 Finished creating instance of bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
-Unable to locate MessageSource with name 'messageSource': using default [org.springframework.context.support.DelegatingMessageSource@68a9b2d1]
-Unable to locate ApplicationEventMulticaster with name 'applicationEventMulticaster': using default [org.springframework.context.event.SimpleApplicationEventMulticaster@799a4e28]
-Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@3f3b3bcf: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,ARDrone,enviromentChange,ARDroneII,enviromentChangeII,ARDroneUpdatingController,PainterEnvironment,PainterEnvironmentSimulation,counterEnactor,enactorFactory,controllerScheduler,randomScheduler,UpdateControllerScheduler,UIController,schedullerFactory,GridSimulationEnactor]; root of factory hierarchy
+Unable to locate MessageSource with name 'messageSource': using default [org.springframework.context.support.DelegatingMessageSource@4966f744]
+Unable to locate ApplicationEventMulticaster with name 'applicationEventMulticaster': using default [org.springframework.context.event.SimpleApplicationEventMulticaster@5b8873f8]
+Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@7a091f6c: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,ARDrone,enviromentChange,ARDroneII,enviromentChangeII,ARDroneUpdatingController,PainterEnvironment,PainterEnvironmentSimulation,counterEnactor,enactorFactory,controllerScheduler,randomScheduler,UpdateControllerScheduler,UIController,schedullerFactory,GridSimulationEnactor]; root of factory hierarchy
 Returning cached instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
 Returning cached instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
 Returning cached instance of singleton bean 'org.springframework.context.annotation.internalRequiredAnnotationProcessor'
@@ -158,7 +158,7 @@ Autowiring by type from bean name 'schedullerFactory' to bean named 'UIControlle
 Finished creating instance of bean 'schedullerFactory'
 Returning cached instance of singleton bean 'GridSimulationEnactor'
 Returning cached instance of singleton bean 'org.springframework.context.event.internalEventListenerFactory'
-Unable to locate LifecycleProcessor with name 'lifecycleProcessor': using default [org.springframework.context.support.DefaultLifecycleProcessor@65c892dc]
+Unable to locate LifecycleProcessor with name 'lifecycleProcessor': using default [org.springframework.context.support.DefaultLifecycleProcessor@63a04860]
 Returning cached instance of singleton bean 'lifecycleProcessor'
 Could not find key 'spring.liveBeansView.mbeanDomain' in any property source
 Returning cached instance of singleton bean 'schedullerFactory'
@@ -166,8 +166,6 @@ Returning cached instance of singleton bean 'enactorFactory'
 Returning cached instance of singleton bean 'enactorFactory'
 Returning cached instance of singleton bean 'schedullerFactory'
 Simulation setup: 
-Scheduler: Take First Controller
-Take First Controller (Take First Controller) takeNextAction go.s
-Take First Controller (Take First Controller) takeNextAction go.e
+Scheduler: Random Controller
+Random Controller (Random Controller) takeNextAction go.e out of [,go.s,go.e]
 Simulation started
-[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 3891 taking incoming action go.e

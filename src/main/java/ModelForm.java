@@ -146,7 +146,7 @@ public class ModelForm {
                         EnactmentOptions enactmentOptions = new EnactmentOptions();
 
                         List<String> schedulerNames = schedulerFactory.getSchedulersList();
-                        enactmentOptions.scheduler = schedulerNames.get(0);
+                        enactmentOptions.scheduler = schedulerNames.get(1);
                         List<String> enactorsNames = enactorFactory.getEnactorNames();
                         int indexEnactorGridEnvironment = -1;
                         for(int index=0;index < enactorsNames.size();index++)
