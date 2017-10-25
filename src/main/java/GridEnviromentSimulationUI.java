@@ -9,8 +9,8 @@ public class GridEnviromentSimulationUI extends JFrame{
     CellPane actual;
     CellPane startingToMove;
 
-    private static final Color STARTINGCOLOR =  Color.getHSBColor(102,25,61);
-    private static final Color ACTUALCOLOR =  Color.getHSBColor(99,44,44);
+    private static final Color STARTINGCOLOR =  Color.gray;
+    private static final Color ACTUALCOLOR =  Color.orange;
 
 
     public GridEnviromentSimulationUI(){
@@ -26,6 +26,8 @@ public class GridEnviromentSimulationUI extends JFrame{
                 Map map = MapParser.parse(Map.TEMPPATH);
                 grid = new Grid(map,false);
                 actual = grid.getCell(map.getInitialCell().getRow(), map.getInitialCell().getColumn());
+                startingToMove(0,0);
+                finishingToMove(0,0);
                 gridPanel = grid;
                 frame.add(gridPanel);
                 frame.pack();
@@ -46,17 +48,12 @@ public class GridEnviromentSimulationUI extends JFrame{
     }
 
     public void startingToMove(int vertical, int horizontal){
-        if(actual == null)
-            return;
-
         actual.endMomentarilyPaint();
         startingToMove = grid.getCell(  actual.getCell().getRow() + vertical, actual.getCell().getColumn() + horizontal);
         startingToMove.startMomentarilyPaint(STARTINGCOLOR);
     }
 
     public void finishingToMove(int vertical, int horizontal){
-        if(startingToMove == null)
-            return;
         startingToMove.endMomentarilyPaint();
         actual = grid.getCell(startingToMove.getCell().getRow()+ vertical, startingToMove.getCell().getColumn()+ horizontal);
         actual.startMomentarilyPaint(ACTUALCOLOR);

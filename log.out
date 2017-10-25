@@ -1,7 +1,7 @@
 Adding [systemProperties] PropertySource with lowest search precedence
 Adding [systemEnvironment] PropertySource with lowest search precedence
 Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7066ddd: startup date [Tue Oct 24 10:06:54 KST 2017]; root of context hierarchy
+Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@60260780: startup date [Wed Oct 25 10:00:49 KST 2017]; root of context hierarchy
 Adding [systemProperties] PropertySource with lowest search precedence
 Adding [systemEnvironment] PropertySource with lowest search precedence
 Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
@@ -24,8 +24,8 @@ Found XML schema [http://www.springframework.org/schema/tool/spring-tool-3.0.xsd
 Loading bean definitions
 Loaded 14 bean definitions from location pattern [classpath*:ltsa-context.xml]
 Imported 14 bean definitions from URL location [classpath*:ltsa-context.xml]
-Loaded 21 bean definitions from location pattern [classpath*:newtool-context.xml]
-Bean factory for org.springframework.context.support.ClassPathXmlApplicationContext@7066ddd: org.springframework.beans.factory.support.DefaultListableBeanFactory@7a091f6c: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,ARDrone,enviromentChange,ARDroneII,enviromentChangeII,ARDroneUpdatingController,PainterEnvironment,PainterEnvironmentSimulation,counterEnactor,enactorFactory,controllerScheduler,randomScheduler,UpdateControllerScheduler,UIController,schedullerFactory,GridSimulationEnactor]; root of factory hierarchy
+Loaded 23 bean definitions from location pattern [classpath*:newtool-context.xml]
+Bean factory for org.springframework.context.support.ClassPathXmlApplicationContext@60260780: org.springframework.beans.factory.support.DefaultListableBeanFactory@3f3b3bcf: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,ARDrone,enviromentChange,ARDroneII,enviromentChangeII,ARDroneUpdatingController,PainterEnvironment,PainterEnvironmentSimulation,counterEnactor,enactorFactory,controllerScheduler,randomScheduler,UpdateControllerScheduler,UIController,schedullerFactory,GridSimulationEnactor,UIRandomScheduller,GridSimulationAdaptedUIRandomScheduller]; root of factory hierarchy
 Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
 Creating instance of bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
 Eagerly caching bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor' to allow for resolving potential circular references
@@ -43,9 +43,9 @@ Creating shared instance of singleton bean 'org.springframework.context.annotati
 Creating instance of bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
 Eagerly caching bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor' to allow for resolving potential circular references
 Finished creating instance of bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
-Unable to locate MessageSource with name 'messageSource': using default [org.springframework.context.support.DelegatingMessageSource@4966f744]
-Unable to locate ApplicationEventMulticaster with name 'applicationEventMulticaster': using default [org.springframework.context.event.SimpleApplicationEventMulticaster@5b8873f8]
-Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@7a091f6c: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,ARDrone,enviromentChange,ARDroneII,enviromentChangeII,ARDroneUpdatingController,PainterEnvironment,PainterEnvironmentSimulation,counterEnactor,enactorFactory,controllerScheduler,randomScheduler,UpdateControllerScheduler,UIController,schedullerFactory,GridSimulationEnactor]; root of factory hierarchy
+Unable to locate MessageSource with name 'messageSource': using default [org.springframework.context.support.DelegatingMessageSource@cf73873]
+Unable to locate ApplicationEventMulticaster with name 'applicationEventMulticaster': using default [org.springframework.context.event.SimpleApplicationEventMulticaster@3fcb2fe4]
+Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@3f3b3bcf: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,ARDrone,enviromentChange,ARDroneII,enviromentChangeII,ARDroneUpdatingController,PainterEnvironment,PainterEnvironmentSimulation,counterEnactor,enactorFactory,controllerScheduler,randomScheduler,UpdateControllerScheduler,UIController,schedullerFactory,GridSimulationEnactor,UIRandomScheduller,GridSimulationAdaptedUIRandomScheduller]; root of factory hierarchy
 Returning cached instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
 Returning cached instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
 Returning cached instance of singleton bean 'org.springframework.context.annotation.internalRequiredAnnotationProcessor'
@@ -124,6 +124,14 @@ Creating shared instance of singleton bean 'GridSimulationEnactor'
 Creating instance of bean 'GridSimulationEnactor'
 Eagerly caching bean 'GridSimulationEnactor' to allow for resolving potential circular references
 Finished creating instance of bean 'GridSimulationEnactor'
+Creating shared instance of singleton bean 'UIRandomScheduller'
+Creating instance of bean 'UIRandomScheduller'
+Eagerly caching bean 'UIRandomScheduller' to allow for resolving potential circular references
+Finished creating instance of bean 'UIRandomScheduller'
+Creating shared instance of singleton bean 'GridSimulationAdaptedUIRandomScheduller'
+Creating instance of bean 'GridSimulationAdaptedUIRandomScheduller'
+Eagerly caching bean 'GridSimulationAdaptedUIRandomScheduller' to allow for resolving potential circular references
+Finished creating instance of bean 'GridSimulationAdaptedUIRandomScheduller'
 Autowiring by type from bean name 'enactorFactory' to bean named 'ARDrone'
 Autowiring by type from bean name 'enactorFactory' to bean named 'enviromentChange'
 Autowiring by type from bean name 'enactorFactory' to bean named 'ARDroneII'
@@ -137,6 +145,8 @@ Autowiring by type from bean name 'enactorFactory' to bean named 'randomSchedule
 Autowiring by type from bean name 'enactorFactory' to bean named 'UpdateControllerScheduler'
 Autowiring by type from bean name 'enactorFactory' to bean named 'UIController'
 Autowiring by type from bean name 'enactorFactory' to bean named 'GridSimulationEnactor'
+Autowiring by type from bean name 'enactorFactory' to bean named 'UIRandomScheduller'
+Autowiring by type from bean name 'enactorFactory' to bean named 'GridSimulationAdaptedUIRandomScheduller'
 Finished creating instance of bean 'enactorFactory'
 Returning cached instance of singleton bean 'controllerScheduler'
 Returning cached instance of singleton bean 'randomScheduler'
@@ -151,14 +161,20 @@ Returning cached instance of singleton bean 'controllerScheduler'
 Returning cached instance of singleton bean 'randomScheduler'
 Returning cached instance of singleton bean 'UpdateControllerScheduler'
 Returning cached instance of singleton bean 'UIController'
+Returning cached instance of singleton bean 'UIRandomScheduller'
+Returning cached instance of singleton bean 'GridSimulationAdaptedUIRandomScheduller'
 Autowiring by type from bean name 'schedullerFactory' to bean named 'controllerScheduler'
 Autowiring by type from bean name 'schedullerFactory' to bean named 'randomScheduler'
 Autowiring by type from bean name 'schedullerFactory' to bean named 'UpdateControllerScheduler'
 Autowiring by type from bean name 'schedullerFactory' to bean named 'UIController'
+Autowiring by type from bean name 'schedullerFactory' to bean named 'UIRandomScheduller'
+Autowiring by type from bean name 'schedullerFactory' to bean named 'GridSimulationAdaptedUIRandomScheduller'
 Finished creating instance of bean 'schedullerFactory'
 Returning cached instance of singleton bean 'GridSimulationEnactor'
+Returning cached instance of singleton bean 'UIRandomScheduller'
+Returning cached instance of singleton bean 'GridSimulationAdaptedUIRandomScheduller'
 Returning cached instance of singleton bean 'org.springframework.context.event.internalEventListenerFactory'
-Unable to locate LifecycleProcessor with name 'lifecycleProcessor': using default [org.springframework.context.support.DefaultLifecycleProcessor@63a04860]
+Unable to locate LifecycleProcessor with name 'lifecycleProcessor': using default [org.springframework.context.support.DefaultLifecycleProcessor@212f65a1]
 Returning cached instance of singleton bean 'lifecycleProcessor'
 Could not find key 'spring.liveBeansView.mbeanDomain' in any property source
 Returning cached instance of singleton bean 'schedullerFactory'
@@ -166,6 +182,49 @@ Returning cached instance of singleton bean 'enactorFactory'
 Returning cached instance of singleton bean 'enactorFactory'
 Returning cached instance of singleton bean 'schedullerFactory'
 Simulation setup: 
-Scheduler: Random Controller
-Random Controller (Random Controller) takeNextAction go.e out of [,go.s,go.e]
+Scheduler: GridSimulationAdaptedUIRandomScheduller
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
 Simulation started
+[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 3181 taking incoming action go.e
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.0.1 out of [,arrive.0.1]
+[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 3608 taking incoming action nodetour
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 3458 taking incoming action go.s
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.1.1 out of [,arrive.1.1]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
+[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 4713 taking incoming action go.e
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.1.2 out of [,arrive.1.2]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 34 taking incoming action go.s
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.1.2 out of [,arrive.1.2]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 34 taking incoming action go.s
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.3.2 out of [,arrive.3.2]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 2502 taking incoming action go.s
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.3.2 out of [,arrive.3.2]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 2502 taking incoming action go.s
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.4.2 out of [,arrive.4.2]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 518 taking incoming action go.s
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.4.3 out of [,arrive.4.3]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 105 taking incoming action go.s
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.5.3 out of [,arrive.5.3]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
+[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 3739 taking incoming action go.e
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.5.4 out of [,arrive.5.4]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
+[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 2476 taking incoming action go.e

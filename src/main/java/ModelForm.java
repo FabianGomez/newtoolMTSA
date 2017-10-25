@@ -78,9 +78,8 @@ public class ModelForm {
                     textAreaResult.setText("");
                     LTSInputString ltsinput = new LTSInputString(textAreaLTS.getText());
                     WindowOutput ltsoutput = new WindowOutput(textAreaResult);
-                    String currentDirectory = filename;
 
-                    LTSCompiler compiler = new LTSCompiler(ltsinput, ltsoutput, currentDirectory);
+                    LTSCompiler compiler = new LTSCompiler(ltsinput, ltsoutput, filename);
                     compiler.compile();
                     Hashtable cs = compiler.getComposites();
                     Hashtable ps = compiler.getProcesses();
