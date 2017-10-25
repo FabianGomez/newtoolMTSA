@@ -20,20 +20,20 @@ import java.util.Set;
  *
  */
 
-public class UIRandomScheduller<State, Action> extends RandomController<State, Action> {
+public class UIRandomScheduler<State, Action> extends RandomController<State, Action> {
 
 	public UIControllerGui uiControllerGui = null;
 	private Logger logger = LogManager.getLogger(TakeFirstController.class.getName());
 	public List<Action> optUnControllableActions;
 
 
-	public UIRandomScheduller(String name, LTS<State, Action> lts,
-                              Set<Action> controllableActions) {
+	public UIRandomScheduler(String name, LTS<State, Action> lts,
+                             Set<Action> controllableActions) {
 		super(name, lts, controllableActions);
 
 	}
 
-	public UIRandomScheduller(String name) {
+	public UIRandomScheduler(String name) {
 		super(name);
 	}
 	
@@ -48,18 +48,18 @@ public class UIRandomScheduller<State, Action> extends RandomController<State, A
 		
 		
 		Iterator<Pair<Action,State>> stateIterator = lts.getTransitions(currentState).iterator();
-				
+
 		if(!stateIterator.hasNext()){
 			String exceptionString = "";
 			logger.error(String.format("[Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState %s"
 					, currentState.toString(), exceptionString));
 			throw new Exception(exceptionString);
-		}		
+		}
 		
 		
 		optUnControllableActions = new ArrayList<Action>();
 
-		while(stateIterator.hasNext()){		
+		while(stateIterator.hasNext()){
 			Pair<Action, State> currentPair	= stateIterator.next();
 			
 			if(!controllableActions.contains(currentPair.getFirst())){

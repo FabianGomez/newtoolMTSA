@@ -27,12 +27,12 @@
         <constructor-arg index="10" value="arrive"/>
     </bean>
 
-    <bean id="UIRandomScheduller" class="UIRandomScheduller">
-        <constructor-arg index="0" value="UIRandomScheduller"/>
+    <bean id="UIRandomScheduler" class="UIRandomScheduler">
+        <constructor-arg index="0" value="UIRandomScheduler"/>
     </bean>
 
-    <bean id="GridSimulationAdaptedUIRandomScheduller" class="GridSimulationAdaptedUIRandomScheduller">
-        <constructor-arg index="0" value="GridSimulationAdaptedUIRandomScheduller"/>
+    <bean id="GridSimulationAdaptedUIRandomScheduler" class="GridSimulationAdaptedUIRandomScheduler">
+        <constructor-arg index="0" value="GridSimulationAdaptedUIRandomScheduler"/>
     </bean>
 
 </beans>

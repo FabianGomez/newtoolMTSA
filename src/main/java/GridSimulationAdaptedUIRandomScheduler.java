@@ -4,7 +4,6 @@ import MTSTools.ac.ic.doc.mtstools.model.LTS;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Set;
 
 import static java.lang.Thread.sleep;
@@ -14,18 +13,18 @@ import static java.lang.Thread.sleep;
  *
  */
 
-public class GridSimulationAdaptedUIRandomScheduller<State, Action> extends UIRandomScheduller<State, Action> {
+public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRandomScheduler<State, Action> {
 
 	private boolean actionFired = false;
-	public final static String SCHEDULLERNAME = "GridSimulationAdaptedUIRandomScheduller";
+	public final static String SCHEDULLERNAME = "GridSimulationAdaptedUIRandomScheduler";
 
-	public GridSimulationAdaptedUIRandomScheduller(String name, LTS<State, Action> lts,
-                                                   Set<Action> controllableActions) {
+	public GridSimulationAdaptedUIRandomScheduler(String name, LTS<State, Action> lts,
+												  Set<Action> controllableActions) {
 		super(name, lts, controllableActions);
 
 	}
 
-	public GridSimulationAdaptedUIRandomScheduller(String name) {
+	public GridSimulationAdaptedUIRandomScheduler(String name) {
 		super(name);
 	}
 	

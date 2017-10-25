@@ -145,15 +145,15 @@ public class ModelForm {
 
                         //Set the Scheduller
                         List<String> schedulerNames = schedulerFactory.getSchedulersList();
-                        int indexSchedullerGridEnvironment = -1;
+                        int indexSchedulerGridEnvironment = -1;
                         for(int index=0;index < schedulerNames.size();index++)
-                            if(schedulerNames.get(index).equals(GridSimulationAdaptedUIRandomScheduller.SCHEDULLERNAME))
-                                indexSchedullerGridEnvironment = index;
-                        if (indexSchedullerGridEnvironment == -1) {
-                            JOptionPane.showMessageDialog(null, "Scheduller 'GridSimulationAdaptedUIRandomScheduller' not found", "Error", 1, null);
+                            if(schedulerNames.get(index).equals(GridSimulationAdaptedUIRandomScheduler.SCHEDULLERNAME))
+                                indexSchedulerGridEnvironment = index;
+                        if (indexSchedulerGridEnvironment == -1) {
+                            JOptionPane.showMessageDialog(null, "Scheduler 'GridSimulationAdaptedUIRandomScheduler' not found", "Error", 1, null);
                             return;
                         }
-                        enactmentOptions.scheduler = schedulerNames.get(indexSchedullerGridEnvironment);
+                        enactmentOptions.scheduler = schedulerNames.get(indexSchedulerGridEnvironment);
 
                         //Set the Enactor
                         List<String> enactorsNames = enactorFactory.getEnactorNames();

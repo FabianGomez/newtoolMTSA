@@ -25,7 +25,7 @@ Loading bean definitions
 Loaded 14 bean definitions from location pattern [classpath*:ltsa-context.xml]
 Imported 14 bean definitions from URL location [classpath*:ltsa-context.xml]
 Loaded 23 bean definitions from location pattern [classpath*:newtool-context.xml]
-Bean factory for org.springframework.context.support.ClassPathXmlApplicationContext@60260780: org.springframework.beans.factory.support.DefaultListableBeanFactory@3f3b3bcf: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,ARDrone,enviromentChange,ARDroneII,enviromentChangeII,ARDroneUpdatingController,PainterEnvironment,PainterEnvironmentSimulation,counterEnactor,enactorFactory,controllerScheduler,randomScheduler,UpdateControllerScheduler,UIController,schedullerFactory,GridSimulationEnactor,UIRandomScheduller,GridSimulationAdaptedUIRandomScheduller]; root of factory hierarchy
+Bean factory for org.springframework.context.support.ClassPathXmlApplicationContext@60260780: org.springframework.beans.factory.support.DefaultListableBeanFactory@3f3b3bcf: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,ARDrone,enviromentChange,ARDroneII,enviromentChangeII,ARDroneUpdatingController,PainterEnvironment,PainterEnvironmentSimulation,counterEnactor,enactorFactory,controllerScheduler,randomScheduler,UpdateControllerScheduler,UIController,schedullerFactory,GridSimulationEnactor,UIRandomScheduler,GridSimulationAdaptedUIRandomScheduler]; root of factory hierarchy
 Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
 Creating instance of bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
 Eagerly caching bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor' to allow for resolving potential circular references
@@ -45,7 +45,7 @@ Eagerly caching bean 'org.springframework.context.annotation.internalCommonAnnot
 Finished creating instance of bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
 Unable to locate MessageSource with name 'messageSource': using default [org.springframework.context.support.DelegatingMessageSource@cf73873]
 Unable to locate ApplicationEventMulticaster with name 'applicationEventMulticaster': using default [org.springframework.context.event.SimpleApplicationEventMulticaster@3fcb2fe4]
-Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@3f3b3bcf: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,ARDrone,enviromentChange,ARDroneII,enviromentChangeII,ARDroneUpdatingController,PainterEnvironment,PainterEnvironmentSimulation,counterEnactor,enactorFactory,controllerScheduler,randomScheduler,UpdateControllerScheduler,UIController,schedullerFactory,GridSimulationEnactor,UIRandomScheduller,GridSimulationAdaptedUIRandomScheduller]; root of factory hierarchy
+Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@3f3b3bcf: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,ARDrone,enviromentChange,ARDroneII,enviromentChangeII,ARDroneUpdatingController,PainterEnvironment,PainterEnvironmentSimulation,counterEnactor,enactorFactory,controllerScheduler,randomScheduler,UpdateControllerScheduler,UIController,schedullerFactory,GridSimulationEnactor,UIRandomScheduler,GridSimulationAdaptedUIRandomScheduler]; root of factory hierarchy
 Returning cached instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
 Returning cached instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
 Returning cached instance of singleton bean 'org.springframework.context.annotation.internalRequiredAnnotationProcessor'
@@ -124,14 +124,14 @@ Creating shared instance of singleton bean 'GridSimulationEnactor'
 Creating instance of bean 'GridSimulationEnactor'
 Eagerly caching bean 'GridSimulationEnactor' to allow for resolving potential circular references
 Finished creating instance of bean 'GridSimulationEnactor'
-Creating shared instance of singleton bean 'UIRandomScheduller'
-Creating instance of bean 'UIRandomScheduller'
-Eagerly caching bean 'UIRandomScheduller' to allow for resolving potential circular references
-Finished creating instance of bean 'UIRandomScheduller'
-Creating shared instance of singleton bean 'GridSimulationAdaptedUIRandomScheduller'
-Creating instance of bean 'GridSimulationAdaptedUIRandomScheduller'
-Eagerly caching bean 'GridSimulationAdaptedUIRandomScheduller' to allow for resolving potential circular references
-Finished creating instance of bean 'GridSimulationAdaptedUIRandomScheduller'
+Creating shared instance of singleton bean 'UIRandomScheduler'
+Creating instance of bean 'UIRandomScheduler'
+Eagerly caching bean 'UIRandomScheduler' to allow for resolving potential circular references
+Finished creating instance of bean 'UIRandomScheduler'
+Creating shared instance of singleton bean 'GridSimulationAdaptedUIRandomScheduler'
+Creating instance of bean 'GridSimulationAdaptedUIRandomScheduler'
+Eagerly caching bean 'GridSimulationAdaptedUIRandomScheduler' to allow for resolving potential circular references
+Finished creating instance of bean 'GridSimulationAdaptedUIRandomScheduler'
 Autowiring by type from bean name 'enactorFactory' to bean named 'ARDrone'
 Autowiring by type from bean name 'enactorFactory' to bean named 'enviromentChange'
 Autowiring by type from bean name 'enactorFactory' to bean named 'ARDroneII'
@@ -145,8 +145,8 @@ Autowiring by type from bean name 'enactorFactory' to bean named 'randomSchedule
 Autowiring by type from bean name 'enactorFactory' to bean named 'UpdateControllerScheduler'
 Autowiring by type from bean name 'enactorFactory' to bean named 'UIController'
 Autowiring by type from bean name 'enactorFactory' to bean named 'GridSimulationEnactor'
-Autowiring by type from bean name 'enactorFactory' to bean named 'UIRandomScheduller'
-Autowiring by type from bean name 'enactorFactory' to bean named 'GridSimulationAdaptedUIRandomScheduller'
+Autowiring by type from bean name 'enactorFactory' to bean named 'UIRandomScheduler'
+Autowiring by type from bean name 'enactorFactory' to bean named 'GridSimulationAdaptedUIRandomScheduler'
 Finished creating instance of bean 'enactorFactory'
 Returning cached instance of singleton bean 'controllerScheduler'
 Returning cached instance of singleton bean 'randomScheduler'
@@ -161,18 +161,18 @@ Returning cached instance of singleton bean 'controllerScheduler'
 Returning cached instance of singleton bean 'randomScheduler'
 Returning cached instance of singleton bean 'UpdateControllerScheduler'
 Returning cached instance of singleton bean 'UIController'
-Returning cached instance of singleton bean 'UIRandomScheduller'
-Returning cached instance of singleton bean 'GridSimulationAdaptedUIRandomScheduller'
+Returning cached instance of singleton bean 'UIRandomScheduler'
+Returning cached instance of singleton bean 'GridSimulationAdaptedUIRandomScheduler'
 Autowiring by type from bean name 'schedullerFactory' to bean named 'controllerScheduler'
 Autowiring by type from bean name 'schedullerFactory' to bean named 'randomScheduler'
 Autowiring by type from bean name 'schedullerFactory' to bean named 'UpdateControllerScheduler'
 Autowiring by type from bean name 'schedullerFactory' to bean named 'UIController'
-Autowiring by type from bean name 'schedullerFactory' to bean named 'UIRandomScheduller'
-Autowiring by type from bean name 'schedullerFactory' to bean named 'GridSimulationAdaptedUIRandomScheduller'
+Autowiring by type from bean name 'schedullerFactory' to bean named 'UIRandomScheduler'
+Autowiring by type from bean name 'schedullerFactory' to bean named 'GridSimulationAdaptedUIRandomScheduler'
 Finished creating instance of bean 'schedullerFactory'
 Returning cached instance of singleton bean 'GridSimulationEnactor'
-Returning cached instance of singleton bean 'UIRandomScheduller'
-Returning cached instance of singleton bean 'GridSimulationAdaptedUIRandomScheduller'
+Returning cached instance of singleton bean 'UIRandomScheduler'
+Returning cached instance of singleton bean 'GridSimulationAdaptedUIRandomScheduler'
 Returning cached instance of singleton bean 'org.springframework.context.event.internalEventListenerFactory'
 Unable to locate LifecycleProcessor with name 'lifecycleProcessor': using default [org.springframework.context.support.DefaultLifecycleProcessor@212f65a1]
 Returning cached instance of singleton bean 'lifecycleProcessor'
@@ -182,49 +182,49 @@ Returning cached instance of singleton bean 'enactorFactory'
 Returning cached instance of singleton bean 'enactorFactory'
 Returning cached instance of singleton bean 'schedullerFactory'
 Simulation setup: 
-Scheduler: GridSimulationAdaptedUIRandomScheduller
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
+Scheduler: GridSimulationAdaptedUIRandomScheduler
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.e out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.e out of [,go.s,go.e]
 Simulation started
 [Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 3181 taking incoming action go.e
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.0.1 out of [,arrive.0.1]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction arrive.0.1 out of [,arrive.0.1]
 [Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 3608 taking incoming action nodetour
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
 [Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 3458 taking incoming action go.s
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.1.1 out of [,arrive.1.1]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction arrive.1.1 out of [,arrive.1.1]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.e out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.e out of [,go.s,go.e]
 [Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 4713 taking incoming action go.e
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.1.2 out of [,arrive.1.2]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction arrive.1.2 out of [,arrive.1.2]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
 [Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 34 taking incoming action go.s
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.1.2 out of [,arrive.1.2]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction arrive.1.2 out of [,arrive.1.2]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
 [Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 34 taking incoming action go.s
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.3.2 out of [,arrive.3.2]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction arrive.3.2 out of [,arrive.3.2]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
 [Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 2502 taking incoming action go.s
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.3.2 out of [,arrive.3.2]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction arrive.3.2 out of [,arrive.3.2]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
 [Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 2502 taking incoming action go.s
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.4.2 out of [,arrive.4.2]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction arrive.4.2 out of [,arrive.4.2]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.e out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
 [Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 518 taking incoming action go.s
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.4.3 out of [,arrive.4.3]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction arrive.4.3 out of [,arrive.4.3]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
 [Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 105 taking incoming action go.s
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.5.3 out of [,arrive.5.3]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction arrive.5.3 out of [,arrive.5.3]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.e out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.e out of [,go.s,go.e]
 [Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 3739 taking incoming action go.e
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction arrive.5.4 out of [,arrive.5.4]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.s out of [,go.s,go.e]
-Random Controller (GridSimulationAdaptedUIRandomScheduller) takeNextAction go.e out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction arrive.5.4 out of [,arrive.5.4]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.s out of [,go.s,go.e]
+Random Controller (GridSimulationAdaptedUIRandomScheduler) takeNextAction go.e out of [,go.s,go.e]
 [Scheduler::primitiveHandleTransitionEvent] there is no reachable state from currentState 2476 taking incoming action go.e
