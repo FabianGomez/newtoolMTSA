@@ -67,6 +67,11 @@ public class GridEnvironmentSimulationEnactor<State, Action> extends
         simulationWindow.repaint();
 
     }
+    /*@Override
+    public void handleTransitionEvent(TransitionEvent<Action> transitionEvent) throws Exception {
+
+
+    }*/
 
     private void startingToMove(int vertical, int horizontal){
         simulationWindow.startingToMove(vertical,horizontal);

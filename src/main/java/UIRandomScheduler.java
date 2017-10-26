@@ -58,17 +58,19 @@ public class UIRandomScheduler<State, Action> extends RandomController<State, Ac
 		
 		
 		optUnControllableActions = new ArrayList<Action>();
-
+		boolean taken = false;
 		while(stateIterator.hasNext()){
 			Pair<Action, State> currentPair	= stateIterator.next();
 			
-			if(!controllableActions.contains(currentPair.getFirst())){
+			if(!controllableActions.contains(currentPair.getFirst())) {
 				optUnControllableActions.add(currentPair.getFirst());
 				updateInterface();
-			} else {
-				Thread.sleep(100);
-				super.takeNextAction();
+				taken = true;
 			}
+		}
+		if(!taken){
+			Thread.sleep(100);
+			super.takeNextAction();
 		}
 	}
 

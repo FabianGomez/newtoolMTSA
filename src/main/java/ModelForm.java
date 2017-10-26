@@ -154,6 +154,7 @@ public class ModelForm {
                             return;
                         }
                         enactmentOptions.scheduler = schedulerNames.get(indexSchedulerGridEnvironment);
+                        //enactmentOptions.scheduler = schedulerNames.get();
 
                         //Set the Enactor
                         List<String> enactorsNames = enactorFactory.getEnactorNames();
