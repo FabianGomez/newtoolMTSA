@@ -24,7 +24,7 @@ public class GridEnviromentSimulationUI extends JFrame{
                 frame = new JFrame("MTSA TOOL");
                 frame.setLayout(new BorderLayout());
                 Map map = MapParser.parse(Map.TEMPPATH);
-                grid = new Grid(map,false);
+                grid = new Grid(map,false, null);
                 actual = grid.getCell(map.getInitialCell().getRow(), map.getInitialCell().getColumn());
                 startingToMove(0,0);
                 finishingToMove(0,0);
