@@ -151,9 +151,7 @@ public class MainForm {
         clearButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (currentAction == -1) {
-                    startChangeMap(CLEAR);
-                    clearButton.setBackground(Color.green);
-                    clearButton.setEnabled(true);
+                    startChangeMap(CLEAR, clearButton);
                 } else {
                     clearButton.setBackground(startButton.getBackground());
                     finishChangeMap();
@@ -163,9 +161,7 @@ public class MainForm {
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (currentAction == -1) {
-                    startChangeMap(ADDINGSTART);
-                    startButton.setBackground(Color.green);
-                    startButton.setEnabled(true);
+                    startChangeMap(ADDINGSTART, startButton);
                 } else {
                     startButton.setBackground(goalButton.getBackground());
                     finishChangeMap();
@@ -175,9 +171,7 @@ public class MainForm {
         dangerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (currentAction == -1) {
-                    startChangeMap(ADDINGDANGER);
-                    dangerButton.setBackground(Color.green);
-                    dangerButton.setEnabled(true);
+                    startChangeMap(ADDINGDANGER, dangerButton);
                 } else {
                     dangerButton.setBackground(goalButton.getBackground());
                     finishChangeMap();
@@ -187,9 +181,7 @@ public class MainForm {
         goalButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (currentAction == -1) {
-                    startChangeMap(ADDINGGOAL);
-                    goalButton.setBackground(Color.gray);
-                    goalButton.setEnabled(true);
+                    startChangeMap(ADDINGGOAL, goalButton);
                 } else {
                     goalButton.setBackground(startButton.getBackground());
                     finishChangeMap();
@@ -201,6 +193,7 @@ public class MainForm {
     }
 
     private void enableButton(boolean enabled) {
+
         clearButton.setEnabled(enabled);
         startButton.setEnabled(enabled);
         goalButton.setEnabled(enabled);
@@ -210,9 +203,11 @@ public class MainForm {
         buttonNew.setEnabled(enabled);
         buttonSave.setEnabled(enabled);
     }
-    private void startChangeMap(int action) {
+    private void startChangeMap(int action, JButton button) {
+        button.setBackground(Color.gray);
         currentAction = action;
         enableButton(false);
+        button.setEnabled(true);
     }
 
     private void finishChangeMap() {

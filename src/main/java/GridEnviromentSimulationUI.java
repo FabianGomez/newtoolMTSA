@@ -14,7 +14,6 @@ public class GridEnviromentSimulationUI extends JFrame{
 
 
     public GridEnviromentSimulationUI(){
-
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -41,8 +40,6 @@ public class GridEnviromentSimulationUI extends JFrame{
         setSize(800, 300);
         setLayout(new BorderLayout(5,5));
         add(gridPanel, BorderLayout.NORTH);
-
-
 
         repaint();
     }
