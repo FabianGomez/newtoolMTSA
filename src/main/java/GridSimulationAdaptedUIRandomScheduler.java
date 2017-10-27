@@ -59,7 +59,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 							case KeyEvent.VK_RIGHT :
 								action = "detour.e";
 								break;
-							case KeyEvent.VK_BACK_SPACE :
+							case KeyEvent.VK_SPACE :
 								action = "nodetour";
 								break;
 						}
