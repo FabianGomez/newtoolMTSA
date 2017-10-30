@@ -2,6 +2,7 @@ import MTSAEnactment.ar.uba.dc.lafhis.enactment.gui.UIControllerGui;
 import MTSTools.ac.ic.doc.commons.relations.Pair;
 import MTSTools.ac.ic.doc.mtstools.model.LTS;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Set;
@@ -18,6 +19,13 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 	private boolean actionFired = false;
 	public final static String SCHEDULLERNAME = "GridSimulationAdaptedUIRandomScheduler";
 
+	public final static double VELOCITYSLOW = 7;
+	public final static double VELOCITYNORMAL = 5;
+	public final static double VELOCITYFAST = 0.5;
+	public final static double VELOCITYTOOFAST = 0.125;
+
+	JComboBox velocitytList;
+
 	public GridSimulationAdaptedUIRandomScheduler(String name, LTS<State, Action> lts,
 												  Set<Action> controllableActions) {
 		super(name, lts, controllableActions);
@@ -32,8 +40,16 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 	public void setUp() {
 		super.setUp();
 		this.setReactItSelf(true);
+
 		uiControllerGui = new UIControllerGui();
 		uiControllerGui.setTitle(this.getName());
+
+		String[] velocityStrings = { "SLOW", "NORMAL", "FAST", "TOOFAST" };
+		velocitytList = new JComboBox(velocityStrings);
+		velocitytList.setSelectedIndex(1);
+		Container panel = uiControllerGui.getContentPane();
+		panel.add(velocitytList, BorderLayout.PAGE_END);
+
 
 		KeyboardFocusManager.getCurrentKeyboardFocusManager()
 				.addKeyEventDispatcher(new KeyEventDispatcher() {
@@ -87,12 +103,12 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 		new Thread()
 		{
 			public void run() {
-				int seconds = 0;
+				double seconds = 0;
 				while(actionFired == false){
 					try {
-						sleep(250);
-						seconds++;
-						if(seconds == 20){
+						sleep(125);
+						seconds += 0.125 ;
+						if(seconds >= getVELOCITY()){
 							fireAction("nodetour");
 							return;
 						}
@@ -111,11 +127,25 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 	{
 		actionFired = true;
 		try {
-			sleep(500);
+			sleep(250);
 		}catch (Exception e){
 		}
 		super.fireAction(name);
 
+	}
+
+	public double getVELOCITY(){
+		switch(velocitytList.getSelectedIndex()) {
+			case 0:
+				return GridSimulationAdaptedUIRandomScheduler.VELOCITYSLOW;
+			case 1:
+				return GridSimulationAdaptedUIRandomScheduler.VELOCITYNORMAL;
+			case 2:
+				return GridSimulationAdaptedUIRandomScheduler.VELOCITYFAST;
+			case 3:
+				return GridSimulationAdaptedUIRandomScheduler.VELOCITYTOOFAST;
+		}
+		return GridSimulationAdaptedUIRandomScheduler.VELOCITYNORMAL;
 	}
 
 }

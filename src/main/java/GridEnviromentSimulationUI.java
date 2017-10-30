@@ -1,7 +1,12 @@
+import javafx.event.ActionEvent;
+import javafx.scene.control.ComboBox;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
-public class GridEnviromentSimulationUI extends JFrame{
+public class GridEnviromentSimulationUI extends JFrame {
     private JPanel gridPanel;
     private JFrame frame;
     Grid grid;
@@ -14,6 +19,8 @@ public class GridEnviromentSimulationUI extends JFrame{
 
 
     public GridEnviromentSimulationUI(){
+
+
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {

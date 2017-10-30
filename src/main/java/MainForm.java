@@ -36,8 +36,7 @@ public class MainForm {
     int currentAction = -1;
 
     public MainForm() {
-
-
+        //grid = (JPanel) panel1.getComponent(panel1.getComponentZOrder(grid));
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -51,6 +50,7 @@ public class MainForm {
                 frame.pack();
                 frame.setLocationRelativeTo(null);
                 buttonsPanel.setVisible(false);
+                grid.setVisible(false);
                 //frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
                 frame.setVisible(true);
             }
@@ -66,9 +66,11 @@ public class MainForm {
                     //This is where a real application would open the file.
                     panel1.setVisible(false);
                     Map map = MapParser.parse(file.getAbsolutePath());
+                    panel1.remove(grid);
                     grid = new Grid(map, true, MainForm.this);
                     panel1.add(grid);
                     panel1.setVisible(true);
+                    grid.setVisible(true);
                     buttonsPanel.setVisible(true);
                     ((JFrame) panel1.getTopLevelAncestor()).pack();
                     ((JFrame) panel1.getTopLevelAncestor()).setLocationRelativeTo(null);
@@ -117,6 +119,7 @@ public class MainForm {
                         Map map = new Map();
                         map.setRows(valueRow);
                         map.setColumns(valueColumn);
+                        panel1.remove(grid);
                         grid = new Grid(map, true,MainForm.this);
                         buttonsPanel.setVisible(true);
                         panel1.add(grid);
@@ -223,7 +226,11 @@ public class MainForm {
                 cellPane.setCell(new EmptyCell(row, column));
                 break;
             case ADDINGSTART:
-                cellPane.setCell(new InitialCell(row, column));
+                Map map = ((Grid) grid).getMap();
+                if(map.getInitialCell() == null)
+                    cellPane.setCell(new InitialCell(row, column));
+                else
+                    JOptionPane.showMessageDialog(null, "There is an initial cell", "Error", 1, null);
                 break;
             case ADDINGGOAL:
                 NumberFormat format = NumberFormat.getInstance();

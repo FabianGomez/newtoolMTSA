@@ -132,6 +132,9 @@ public class Model {
     private static List<String> Fluents(Map map)    {
         List<String> definition = new LinkedList<String>();
 
+        if(map.getDangerCells().size() == 0)
+            return  definition;
+
         String fluentOn = "";
         for(DangerCell cell: map.getDangerCells())
             fluentOn += "arrive["+ cell.getRow() +"]["+ cell.getColumn() +"] ,";
