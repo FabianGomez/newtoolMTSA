@@ -14,7 +14,6 @@ public class GridEnviromentSimulationUI extends JFrame{
 
 
     public GridEnviromentSimulationUI(){
-
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -24,7 +23,7 @@ public class GridEnviromentSimulationUI extends JFrame{
                 frame = new JFrame("MTSA TOOL");
                 frame.setLayout(new BorderLayout());
                 Map map = MapParser.parse(Map.TEMPPATH);
-                grid = new Grid(map,false);
+                grid = new Grid(map,false, null);
                 actual = grid.getCell(map.getInitialCell().getRow(), map.getInitialCell().getColumn());
                 startingToMove(0,0);
                 finishingToMove(0,0);
@@ -41,8 +40,6 @@ public class GridEnviromentSimulationUI extends JFrame{
         setSize(800, 300);
         setLayout(new BorderLayout(5,5));
         add(gridPanel, BorderLayout.NORTH);
-
-
 
         repaint();
     }

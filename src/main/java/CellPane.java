@@ -9,8 +9,9 @@ public class CellPane extends JPanel {
 
     private Color defaultBackground;
     private Cell cell;
-
-    public CellPane(boolean modified) {
+    private MainForm mainForm;
+    public CellPane(boolean modified, final MainForm mainForm) {
+        this.mainForm = mainForm;
         if(modified) {
             addMouseListener(new MouseAdapter() {
                 @Override
@@ -26,42 +27,7 @@ public class CellPane extends JPanel {
 
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    DialogCellAction dialog = new DialogCellAction();
-                    dialog.setSize(500, 100);
-                    dialog.setLocationRelativeTo(null);
-                    dialog.show();
-                    int response = dialog.dialogResponse;
-                    int column = getCell().getColumn();
-                    int row = getCell().getRow();
-                    switch (response) {
-                        case DialogCellAction.CONSTCLEAR:
-                            setCell(new EmptyCell(row, column));
-                            break;
-                        case DialogCellAction.CONSTSTART:
-                            setCell(new InitialCell(row, column));
-                            break;
-                        case DialogCellAction.CONSTGOAL:
-                            NumberFormat format = NumberFormat.getInstance();
-                            NumberFormatter formatter = new NumberFormatter(format);
-                            formatter.setValueClass(Integer.class);
-                            formatter.setMinimum(1);
-                            formatter.setMaximum(Integer.MAX_VALUE);
-                            formatter.setAllowsInvalid(false);
-                            formatter.setCommitsOnValidEdit(true);
-                            JFormattedTextField field = new JFormattedTextField(formatter);
-                            field.createToolTip();
-                            field.setToolTipText("Fill the goal's index");
-                            JOptionPane.showMessageDialog(null, field, "Goal", 3, null);
-                            if (field.getValue() != null)
-                                setCell(new GoalCell((Integer) field.getValue(), row, column));
-                            break;
-                        case DialogCellAction.CONSTDANGER:
-                            setCell(new DangerCell(row, column));
-                            break;
-                        default:
-                            break;
-                    }
-
+                    mainForm.listenerChangeCell(CellPane.this);
                     paint();
                 }
             });

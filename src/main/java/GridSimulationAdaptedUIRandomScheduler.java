@@ -77,8 +77,6 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 
 	@Override
 	public void takeNextAction() throws Exception {
-
-
 		super.takeNextAction();
 
 		Pair<Action, State> currentPair	= lts.getTransitions(currentState).iterator().next();
