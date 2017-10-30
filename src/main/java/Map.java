@@ -77,6 +77,14 @@ public class Map {
         }
     }
 
+    public int goalMaxIndex(){
+        int max = 0;
+        for(GoalCell goal : goalCells)
+            if(goal.getValue() > max)
+                max = goal.getValue();
+
+        return max;
+    }
     /*DEPRECATED
     *
     *

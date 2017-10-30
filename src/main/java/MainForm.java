@@ -1,3 +1,5 @@
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import java.text.NumberFormat;
 import javax.management.loading.ClassLoaderRepository;
 import javax.swing.*;
@@ -28,15 +30,15 @@ public class MainForm {
     private static final int ADDINGDANGER = 2;
     private static final int ADDINGGOAL = 3;
 
+    private int currentGoal;
 
     public static void main(String[] args) {
         new MainForm();
     }
 
-    int currentAction = -1;
+    private int currentAction = -1;
 
     public MainForm() {
-        //grid = (JPanel) panel1.getComponent(panel1.getComponentZOrder(grid));
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -44,14 +46,13 @@ public class MainForm {
                 } catch (Exception ex) {
                 }
                 frame = new JFrame("MTSA TOOL");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 frame.setLayout(new BorderLayout());
                 frame.add(panel1);
                 frame.pack();
                 frame.setLocationRelativeTo(null);
                 buttonsPanel.setVisible(false);
                 grid.setVisible(false);
-                //frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
                 frame.setVisible(true);
             }
         });
@@ -63,7 +64,6 @@ public class MainForm {
 
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = dialog.getSelectedFile();
-                    //This is where a real application would open the file.
                     panel1.setVisible(false);
                     Map map = MapParser.parse(file.getAbsolutePath());
                     panel1.remove(grid);
@@ -97,38 +97,23 @@ public class MainForm {
 
         buttonNew.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                NumberFormat format = NumberFormat.getInstance();
-                NumberFormatter formatter = new NumberFormatter(format);
-                formatter.setValueClass(Integer.class);
-                formatter.setMinimum(1);
-                formatter.setMaximum(Integer.MAX_VALUE);
-                formatter.setAllowsInvalid(false);
-                formatter.setCommitsOnValidEdit(true);
-                JFormattedTextField field = new JFormattedTextField(formatter);
-                field.createToolTip();
-                field.setToolTipText("Fill the map's rows size");
-                JOptionPane.showMessageDialog(null, field, "Rows", 3, null);
-                if (field.getValue() != null) {
-                    int valueRow = (Integer) field.getValue();
-                    field.setValue(null);
-                    field.setToolTipText("Fill the maps's column size");
-                    JOptionPane.showMessageDialog(null, field, "Columns", 3, null);
-                    if (field.getValue() != null) {
-                        int valueColumn = (Integer) field.getValue();
+                NewMapForm form  = new NewMapForm();
+                form.setLocationRelativeTo(null);
+                form.pack();
+                form.setVisible(true);
 
-                        Map map = new Map();
-                        map.setRows(valueRow);
-                        map.setColumns(valueColumn);
-                        panel1.remove(grid);
-                        grid = new Grid(map, true,MainForm.this);
-                        buttonsPanel.setVisible(true);
-                        panel1.add(grid);
-                        panel1.setVisible(true);
-                        ((JFrame) panel1.getTopLevelAncestor()).pack();
-                        ((JFrame) panel1.getTopLevelAncestor()).setLocationRelativeTo(null);
-                    }
+                if (form.columns != -1) {
+                    Map map = new Map();
+                    map.setRows(form.rows);
+                    map.setColumns(form.columns);
+                    panel1.remove(grid);
+                    grid = new Grid(map, true,MainForm.this);
+                    buttonsPanel.setVisible(true);
+                    panel1.add(grid);
+                    panel1.setVisible(true);
+                    ((JFrame) panel1.getTopLevelAncestor()).pack();
+                    ((JFrame) panel1.getTopLevelAncestor()).setLocationRelativeTo(null);
                 }
-
             }
         });
         buttonSave.addActionListener(new ActionListener() {
@@ -184,6 +169,7 @@ public class MainForm {
         goalButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (currentAction == -1) {
+                    currentGoal = ((Grid) grid).getMap().goalMaxIndex() + 1;
                     startChangeMap(ADDINGGOAL, goalButton);
                 } else {
                     goalButton.setBackground(startButton.getBackground());
@@ -196,7 +182,6 @@ public class MainForm {
     }
 
     private void enableButton(boolean enabled) {
-
         clearButton.setEnabled(enabled);
         startButton.setEnabled(enabled);
         goalButton.setEnabled(enabled);
@@ -233,19 +218,7 @@ public class MainForm {
                     JOptionPane.showMessageDialog(null, "There is an initial cell", "Error", 1, null);
                 break;
             case ADDINGGOAL:
-                NumberFormat format = NumberFormat.getInstance();
-                NumberFormatter formatter = new NumberFormatter(format);
-                formatter.setValueClass(Integer.class);
-                formatter.setMinimum(1);
-                formatter.setMaximum(Integer.MAX_VALUE);
-                formatter.setAllowsInvalid(false);
-                formatter.setCommitsOnValidEdit(true);
-                JFormattedTextField field = new JFormattedTextField(formatter);
-                field.createToolTip();
-                field.setToolTipText("Fill the goal's index");
-                JOptionPane.showMessageDialog(null, field, "Goal", 3, null);
-                if (field.getValue() != null)
-                    cellPane.setCell(new GoalCell((Integer) field.getValue(), row, column));
+                cellPane.setCell(new GoalCell(currentGoal, row, column));
                 break;
             case ADDINGDANGER:
                 cellPane.setCell(new DangerCell(row, column));

@@ -2,6 +2,7 @@ import MTSAEnactment.ar.uba.dc.lafhis.enactment.RandomController;
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.TakeFirstController;
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.TransitionEvent;
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.gui.UIControllerGui;
+import MTSTools.ac.ic.doc.commons.relations.BinaryRelation;
 import MTSTools.ac.ic.doc.commons.relations.Pair;
 import MTSTools.ac.ic.doc.mtstools.model.LTS;
 import org.apache.log4j.LogManager;
@@ -45,8 +46,7 @@ public class UIRandomScheduler<State, Action> extends RandomController<State, Ac
 	
 	@Override
 	public void takeNextAction() throws Exception {
-		
-		
+
 		Iterator<Pair<Action,State>> stateIterator = lts.getTransitions(currentState).iterator();
 
 		if(!stateIterator.hasNext()){
@@ -72,6 +72,7 @@ public class UIRandomScheduler<State, Action> extends RandomController<State, Ac
 			Thread.sleep(100);
 			super.takeNextAction();
 		}
+
 	}
 
 	public void updateInterface()
