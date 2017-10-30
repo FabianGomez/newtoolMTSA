@@ -24,10 +24,7 @@ public class Map {
         this.initialCell = initialCell;
     }
     public void addGoal(GoalCell goalCell) {
-        if(getGoalCells().size() < goalCell.getValue() -1)
-            getGoalCells().add(goalCell);
-        else
-            getGoalCells().add(goalCell.getValue() -1, goalCell);
+        getGoalCells().add(goalCell);
     }
     public void addDangerCell(DangerCell cell) {
         dangerCells.add(cell);
