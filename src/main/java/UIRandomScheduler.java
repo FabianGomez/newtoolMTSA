@@ -11,10 +11,7 @@ import org.apache.log4j.Logger;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Fabian
@@ -58,21 +55,39 @@ public class UIRandomScheduler<State, Action> extends RandomController<State, Ac
 		
 		
 		optUnControllableActions = new ArrayList<Action>();
-		boolean taken = false;
+		boolean hasNextControllableAction = false;
+		boolean hasNextUnControllableAction = false;
+
 		while(stateIterator.hasNext()){
 			Pair<Action, State> currentPair	= stateIterator.next();
 			
 			if(!controllableActions.contains(currentPair.getFirst())) {
 				optUnControllableActions.add(currentPair.getFirst());
-				updateInterface();
-				taken = true;
+				hasNextUnControllableAction = true;
 			}
-		}
-		if(!taken){
-			Thread.sleep(100);
-			super.takeNextAction();
+			if(controllableActions.contains(currentPair.getFirst()))
+				hasNextControllableAction = true;
+
 		}
 
+		if(!hasNextUnControllableAction){
+			Thread.sleep(100);
+			super.takeNextAction();
+		}else{
+			if(!hasNextControllableAction){
+				updateInterface();
+			}else{
+				//In this case the controller has controllable and uncontrollable action to fire
+				Random randomGenerator = new Random();
+				int binary = randomGenerator.nextInt(2);
+				if(binary == 0) {
+					updateInterface();
+				} else {
+					Thread.sleep(100);
+					super.takeNextAction();
+				}
+			}
+		}
 	}
 
 	public void updateInterface()
