@@ -42,9 +42,12 @@ public class Grid extends JPanel {
             cellPane.setCell(cell);
         }
 
-        for(GoalCell cell : map.getGoalCells()){
-            CellPane cellPane = (cells.get(cell.getRow())).get(cell.getColumn());
-            cellPane.setCell(cell);
+        for(Integer goalId :  map.getGoalCells().keySet()) {
+            List<GoalCell> goalCells = map.getGoalCells().get(goalId);
+            for (GoalCell cell : goalCells) {
+                CellPane cellPane = (cells.get(cell.getRow())).get(cell.getColumn());
+                cellPane.setCell(cell);
+            }
         }
 
         if(map.getInitialCell()!= null) {

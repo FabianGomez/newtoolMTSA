@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.util.*;
 
 public class Model {
@@ -90,10 +91,15 @@ public class Model {
     }
     private static List<String> GoalsPosition(Map map)    {
         List<String> definition = new LinkedList<String>();
-        for(GoalCell goalCell : map.getGoalCells())
-        {
-            definition.add("const GoalRow_" + goalCell.getValue() + " = " + goalCell.getRow());
-            definition.add("const GoalColumn_" + goalCell.getValue() + " = " + goalCell.getColumn());
+        for(Integer goalId :  map.getGoalCells().keySet()){
+            List<GoalCell> goalCells =  map.getGoalCells().get(goalId);
+            int goalRelativeIndex = 1;
+            for(GoalCell goalCell : goalCells)
+            {
+                definition.add("const GoalRow_" + goalId + "_" + goalRelativeIndex + " = " + goalCell.getRow());
+                definition.add("const GoalColumn_" + goalId + "_" + goalRelativeIndex + " = " + goalCell.getColumn());
+                goalRelativeIndex++;
+            }
         }
         return definition;
     }
@@ -160,9 +166,14 @@ public class Model {
     }
     private static List<String> GoalsAsserts(Map map)    {
         List<String> definition = new LinkedList<String>();
-        for(GoalCell goalCell : map.getGoalCells())
-        {
-            definition.add("assert G" + goalCell.getValue() + " = G[GoalRow_" + goalCell.getValue() + "][GoalColumn_" + goalCell.getValue() + "]");
+        for(Integer goalId :  map.getGoalCells().keySet()){
+            List<GoalCell> goalCells =  map.getGoalCells().get(goalId);
+            int goalRelativeIndex = 1;
+            for(GoalCell goalCell : goalCells)
+            {
+                definition.add("assert G" + goalId + "_" + goalRelativeIndex + " = G[GoalRow_" + goalId + "_" + goalRelativeIndex + "][GoalColumn_" + goalId + "_" + goalRelativeIndex + "]");
+                goalRelativeIndex++;
+            }
         }
         return definition;
     }
@@ -175,15 +186,20 @@ public class Model {
 
         String liveness = "liveness = {";
 
-        Collections.sort(map.getGoalCells(), new Comparator<GoalCell>() {
-            public int compare(GoalCell lhs, GoalCell rhs) {
-                return lhs.getValue() < rhs.getValue()? -1 : 1;
-            }
-        });
+        List<Integer> goalIds = new LinkedList<Integer>();
 
-        for(GoalCell goalCell : map.getGoalCells())
+        goalIds.addAll( map.getGoalCells().keySet());
+
+        Collections.sort(goalIds);
+
+        for(Integer goalId : goalIds)
         {
-            liveness += "G" + goalCell.getValue() + ",";
+            List<GoalCell> goalCells =  map.getGoalCells().get(goalId);
+            int goalRelativeIndex = 1;
+            for(GoalCell goalCell : goalCells) {
+                liveness += "G" + goalId + "_" + goalRelativeIndex + ",";
+                goalRelativeIndex++;
+            }
         }
         liveness += "}";
         liveness = liveness.replace(",}","}");

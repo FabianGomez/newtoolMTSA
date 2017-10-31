@@ -1,5 +1,5 @@
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,11 +10,11 @@ public class Map {
     private int rows;
     private int columns;
     private InitialCell initialCell;
-    private List<GoalCell> goalCells;
+    private HashMap<Integer,List<GoalCell>> goalCells;
     private List<DangerCell> dangerCells;
 
     public Map(){
-        this.goalCells = new LinkedList<GoalCell>();
+        this.goalCells = new HashMap<Integer,List<GoalCell>>();
         this.dangerCells = new LinkedList<DangerCell>();
         this.columns = 0;
         this.rows = 0;
@@ -24,7 +24,13 @@ public class Map {
         this.initialCell = initialCell;
     }
     public void addGoal(GoalCell goalCell) {
-        getGoalCells().add(goalCell);
+        if(getGoalCells().containsKey(goalCell.getValue()))
+            getGoalCells().get(goalCell.getValue()).add(goalCell);
+        else{
+            List<GoalCell> goals = new LinkedList<GoalCell>();
+            goals.add(goalCell);
+            getGoalCells().put(goalCell.getValue(),goals);
+        }
     }
     public void addDangerCell(DangerCell cell) {
         dangerCells.add(cell);
@@ -50,7 +56,7 @@ public class Map {
         return initialCell;
     }
 
-    public List<GoalCell> getGoalCells() {
+    public HashMap<Integer,List<GoalCell>> getGoalCells() {
         return goalCells;
     }
 
@@ -76,9 +82,9 @@ public class Map {
 
     public int goalMaxIndex(){
         int max = 0;
-        for(GoalCell goal : goalCells)
-            if(goal.getValue() > max)
-                max = goal.getValue();
+        for(Integer index : goalCells.keySet())
+            if(index > max)
+                max = index;
 
         return max;
     }

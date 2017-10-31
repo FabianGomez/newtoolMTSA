@@ -95,10 +95,12 @@ public class MapParser {
             }
             gridParsed.add(line);
         }
-
-        for(GoalCell cell : map.getGoalCells()){
-            gridParsed.get(cell.getRow()).remove(cell.getColumn());
-            gridParsed.get(cell.getRow()).add(cell.getColumn(),cell.getValue().toString());
+        for(Integer goalId :  map.getGoalCells().keySet()) {
+            List<GoalCell> goalCells = map.getGoalCells().get(goalId);
+            for (GoalCell cell : goalCells) {
+                gridParsed.get(cell.getRow()).remove(cell.getColumn());
+                gridParsed.get(cell.getRow()).add(cell.getColumn(), cell.getValue().toString());
+            }
         }
         for(DangerCell cell : map.getDangerCells()) {
             gridParsed.get(cell.getRow()).remove(cell.getColumn());
