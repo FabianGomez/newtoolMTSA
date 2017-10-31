@@ -17,10 +17,10 @@ public class GridEnvironmentSimulationEnactor<State, Action> extends
         Enactor<State, Action> {
 
     // controllable
-    protected Action goE, goW, goN, goS, arrive;
+    private Action goE, goW, goN, goS, arrive;
     // uncontrollable
-    protected Action detourE, detourW, detourN, detourS;
-    protected Action nodetour;
+    private Action detourE, detourW, detourN, detourS;
+    private Action nodetour;
 
 
     public final static String ENACTORNAME = "GridSimulationEnactor";

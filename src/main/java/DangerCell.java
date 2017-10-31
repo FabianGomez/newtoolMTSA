@@ -17,7 +17,7 @@ public class DangerCell extends Cell{
         return Color.RED;
     }
 
-    public static final String CONSTLABELVALUE() { return ""; }
-    public static final String CONSTVALUE() { return "!"; }
+    private static final String CONSTLABELVALUE() { return ""; }
+    private static final String CONSTVALUE() { return "!"; }
 
 }

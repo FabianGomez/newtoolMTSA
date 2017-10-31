@@ -17,10 +17,10 @@ public class EmptyCell extends Cell{
         return Color.LIGHT_GRAY;
     }
 
-    public static final String CONSTVALUE() {
+    private static final String CONSTVALUE() {
         return "0";
     }
-    public static final String CONSTLABELVALUE() {
+    private static final String CONSTLABELVALUE() {
         return "";
     }
 }

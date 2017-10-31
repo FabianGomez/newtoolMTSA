@@ -18,10 +18,10 @@ public class InitialCell extends Cell{
         return Color.GRAY;
     }
 
-    public static final String CONSTLABELVALUE() {
+    private static final String CONSTLABELVALUE() {
         return CONSTVALUE();
     }
-    public static final String CONSTVALUE() {
+    private static final String CONSTVALUE() {
         return "@";
     }
 }

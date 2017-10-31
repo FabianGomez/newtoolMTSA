@@ -22,7 +22,7 @@ public class UIRandomScheduler<State, Action> extends RandomController<State, Ac
 
 	public UIControllerGui uiControllerGui = null;
 	private Logger logger = LogManager.getLogger(TakeFirstController.class.getName());
-	public List<Action> optUnControllableActions;
+	private List<Action> optUnControllableActions;
 
 
 	public UIRandomScheduler(String name, LTS<State, Action> lts,
@@ -90,7 +90,7 @@ public class UIRandomScheduler<State, Action> extends RandomController<State, Ac
 		}
 	}
 
-	public void updateInterface()
+	private void updateInterface()
 	{
 		if (this.uiControllerGui == null) 
 		{
@@ -124,16 +124,16 @@ public class UIRandomScheduler<State, Action> extends RandomController<State, Ac
 	{
 		if (this.optUnControllableActions == null) return;
 	
-		processActionList(this.optUnControllableActions, name, "controllable");
+		processActionList(this.optUnControllableActions, name);
 
 	}
-	private void processActionList(List<Action> actions, String actionName, String actionType)
+	private void processActionList(List<Action> actions, String actionName)
 	{
 		for (Action action : actions)
 		{
 			if (action.toString().equals(actionName))
 			{
-				this.uiControllerGui.appendMessage("Fire " + actionType + " action: " +  actionName);
+				this.uiControllerGui.appendMessage("Fire controllable action: " +  actionName);
 				try {
 					addTransition(new TransitionEvent<Action>(this, action));
 				} catch (Exception e) {

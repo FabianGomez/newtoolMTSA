@@ -19,12 +19,12 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 	private boolean actionFired = false;
 	public final static String SCHEDULLERNAME = "GridSimulationAdaptedUIRandomScheduler";
 
-	public final static double VELOCITYSLOW = 7;
-	public final static double VELOCITYNORMAL = 5;
-	public final static double VELOCITYFAST = 0.5;
-	public final static double VELOCITYTOOFAST = 0.125;
+	private final static double VELOCITYSLOW = 7;
+	private final static double VELOCITYNORMAL = 5;
+	private final static double VELOCITYFAST = 0.5;
+	private final static double VELOCITYTOOFAST = 0.125;
 
-	JComboBox velocitytList;
+	private JComboBox velocitytList;
 
 	public GridSimulationAdaptedUIRandomScheduler(String name, LTS<State, Action> lts,
 												  Set<Action> controllableActions) {
@@ -104,7 +104,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 		{
 			public void run() {
 				double seconds = 0;
-				while(actionFired == false){
+				while(!actionFired){
 					try {
 						sleep(125);
 						seconds += 0.125 ;
@@ -134,7 +134,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 
 	}
 
-	public double getVELOCITY(){
+	private double getVELOCITY(){
 		switch(velocitytList.getSelectedIndex()) {
 			case 0:
 				return GridSimulationAdaptedUIRandomScheduler.VELOCITYSLOW;
