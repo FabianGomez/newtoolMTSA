@@ -14,12 +14,11 @@ public class GridEnviromentSimulationUI extends JFrame {
     CellPane actual;
     CellPane startingToMove;
 
-    private static final Color STARTINGCOLOR =  Color.gray;
+    private static final Color STARTINGCOLOR =  Color.orange;
     private static final Color ACTUALCOLOR =  Color.orange;
 
 
     public GridEnviromentSimulationUI(){
-
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {

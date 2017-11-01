@@ -5,6 +5,7 @@ import MTSTools.ac.ic.doc.mtstools.model.LTS;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.lang.management.GarbageCollectorMXBean;
 import java.util.Set;
 
 import static java.lang.Thread.sleep;
@@ -93,6 +94,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 
 	@Override
 	public void takeNextAction() throws Exception {
+		System.gc();
 		super.takeNextAction();
 
 		Pair<Action, State> currentPair	= lts.getTransitions(currentState).iterator().next();

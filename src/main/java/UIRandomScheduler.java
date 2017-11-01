@@ -1,6 +1,5 @@
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.BaseController;
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.RandomController;
-import MTSAEnactment.ar.uba.dc.lafhis.enactment.TakeFirstController;
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.TransitionEvent;
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.gui.UIControllerGui;
 import MTSTools.ac.ic.doc.commons.relations.BinaryRelation;
@@ -8,7 +7,6 @@ import MTSTools.ac.ic.doc.commons.relations.Pair;
 import MTSTools.ac.ic.doc.mtstools.model.LTS;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -117,7 +115,7 @@ public class UIRandomScheduler<State, Action> extends BaseController<State, Acti
 		Action nextAction = availables.get(randomPos).getFirst();
 
 		this.uiControllerGui.appendMessage("Fire controllable action: " +  nextAction.toString() );
-		logger.info("UIRandomScheduler takeNextAction " + nextAction.toString()  + " out of [" + availablesActions + "]");
+		logger.info("UIRandomScheduler takeNextAction " + nextAction.toString()  + " out of " + availablesActions);
 
 		this.addTransition(new TransitionEvent<Action>(this, nextAction));
 
@@ -164,7 +162,7 @@ public class UIRandomScheduler<State, Action> extends BaseController<State, Acti
 		{
 			if (action.toString().equals(actionName))
 			{
-				logger.info("UIRandomScheduler takeNextAction " + actionName  + " out of [" + actions + "]");
+				logger.info("UIRandomScheduler takeNextAction " + actionName  + " out of " + actions);
 
 				this.uiControllerGui.appendMessage("Fire uncontrollable action: " +  actionName);
 				try {

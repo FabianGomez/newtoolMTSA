@@ -203,27 +203,37 @@ public class MainForm {
         enableButton(true);
     }
 
-    public void listenerChangeCell(CellPane cellPane){
-        int column = cellPane.getCell().getColumn();
-        int row = cellPane.getCell().getRow();
+    private CellPane initialCellPane;
+
+    public void listenerEndChangeCell(int x, int y){
+        CellPane endCellPane = (CellPane) grid.findComponentAt(x,y);
+
+        int column = endCellPane.getCell().getColumn();
+        int row = endCellPane.getCell().getRow();
+
+
+
         switch (currentAction) {
             case CLEAR:
-                cellPane.setCell(new EmptyCell(row, column));
+                endCellPane.setCell(new EmptyCell(row, column));
                 break;
             case ADDINGSTART:
                 Map map = ((Grid) grid).getMap();
                 if(map.getInitialCell() == null)
-                    cellPane.setCell(new InitialCell(row, column));
+                    endCellPane.setCell(new InitialCell(row, column));
                 else
                     JOptionPane.showMessageDialog(null, "There is an initial cell", "Error", 1, null);
                 break;
             case ADDINGGOAL:
-                cellPane.setCell(new GoalCell(currentGoal, row, column));
+                endCellPane.setCell(new GoalCell(currentGoal, row, column));
                 break;
             case ADDINGDANGER:
-                cellPane.setCell(new DangerCell(row, column));
+                endCellPane.setCell(new DangerCell(row, column));
                 break;
         }
     }
 
+    public void listenerStartChangeCell(CellPane cellPane){
+        initialCellPane = cellPane;
+    }
 }

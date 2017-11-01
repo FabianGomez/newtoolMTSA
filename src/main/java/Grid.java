@@ -34,6 +34,7 @@ public class Grid extends JPanel {
 
         setCells(map);
         paintCells();
+
     }
 
     public void setCells(Map map){

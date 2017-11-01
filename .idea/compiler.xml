@@ -12,7 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="mtsa" target="1.8" />
-      <module name="newtoolMTSA" target="1.5" />
+      <module name="newtoolMTSA" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

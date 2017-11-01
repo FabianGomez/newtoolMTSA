@@ -27,8 +27,18 @@ public class CellPane extends JPanel {
 
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    mainForm.listenerChangeCell(CellPane.this);
-                    paint();
+
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    mainForm.listenerStartChangeCell(CellPane.this);
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    mainForm.listenerEndChangeCell(e.getLocationOnScreen().x, e.getLocationOnScreen().y);
+
                 }
             });
         }
