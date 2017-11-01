@@ -1,3 +1,4 @@
+import MTSAEnactment.ar.uba.dc.lafhis.enactment.BaseController;
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.RandomController;
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.TakeFirstController;
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.TransitionEvent;
@@ -7,6 +8,7 @@ import MTSTools.ac.ic.doc.commons.relations.Pair;
 import MTSTools.ac.ic.doc.mtstools.model.LTS;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,12 +20,11 @@ import java.util.*;
  *
  */
 
-public class UIRandomScheduler<State, Action> extends RandomController<State, Action> {
+public class UIRandomScheduler<State, Action> extends BaseController<State, Action> {
 
 	public UIControllerGui uiControllerGui = null;
-	private Logger logger = LogManager.getLogger(TakeFirstController.class.getName());
+	private Logger logger = LogManager.getLogger(RandomController.class.getName());
 	private List<Action> optUnControllableActions;
-
 
 	public UIRandomScheduler(String name, LTS<State, Action> lts,
                              Set<Action> controllableActions) {
@@ -71,8 +72,8 @@ public class UIRandomScheduler<State, Action> extends RandomController<State, Ac
 		}
 
 		if(!hasNextUnControllableAction){
-			Thread.sleep(100);
-			super.takeNextAction();
+			Thread.sleep(2);
+			takeNextActionRandom();
 		}else{
 			if(!hasNextControllableAction){
 				updateInterface();
@@ -83,11 +84,43 @@ public class UIRandomScheduler<State, Action> extends RandomController<State, Ac
 				if(binary == 0) {
 					updateInterface();
 				} else {
-					Thread.sleep(100);
-					super.takeNextAction();
+					Thread.sleep(2);
+					takeNextActionRandom();
 				}
 			}
 		}
+	}
+
+	private void takeNextActionRandom() throws Exception{
+		BinaryRelation<Action, State> states = lts.getTransitions(currentState);
+
+		if (states == null || states.size() == 0)
+		{
+			String exceptionString = "";
+			throw new Exception(exceptionString);
+		}
+
+		List<Action> availablesActions = new ArrayList<Action>();
+
+		List<Pair<Action, State>> availables = new ArrayList<Pair<Action, State>>();
+		for (Pair<Action, State> pair : states)
+		{
+			if(controllableActions.contains(pair.getFirst())){
+				availables.add(pair);
+				availablesActions.add(pair.getFirst());
+			}
+		}
+		if (availables.size() == 0 ) return;
+
+
+		int randomPos = (int) (Math.random() * availables.size());
+		Action nextAction = availables.get(randomPos).getFirst();
+
+		this.uiControllerGui.appendMessage("Fire controllable action: " +  nextAction.toString() );
+		logger.info("UIRandomScheduler takeNextAction " + nextAction.toString()  + " out of [" + availablesActions + "]");
+
+		this.addTransition(new TransitionEvent<Action>(this, nextAction));
+
 	}
 
 	private void updateInterface()
@@ -133,7 +166,9 @@ public class UIRandomScheduler<State, Action> extends RandomController<State, Ac
 		{
 			if (action.toString().equals(actionName))
 			{
-				this.uiControllerGui.appendMessage("Fire controllable action: " +  actionName);
+				logger.info("UIRandomScheduler takeNextAction " + actionName  + " out of [" + actions + "]");
+
+				this.uiControllerGui.appendMessage("Fire uncontrollable action: " +  actionName);
 				try {
 					addTransition(new TransitionEvent<Action>(this, action));
 				} catch (Exception e) {

@@ -19,10 +19,10 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 	private boolean actionFired = false;
 	public final static String SCHEDULLERNAME = "GridSimulationAdaptedUIRandomScheduler";
 
-	private final static double VELOCITYSLOW = 7;
-	private final static double VELOCITYNORMAL = 5;
-	private final static double VELOCITYFAST = 0.5;
-	private final static double VELOCITYTOOFAST = 0.125;
+	private final static double VELOCITYSLOW = 5;
+	private final static double VELOCITYNORMAL = 2;
+	private final static double VELOCITYFAST = 1;
+	private final static double VELOCITYTOOFAST = 0.002;
 
 	private JComboBox velocitytList;
 
@@ -106,8 +106,8 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 				double seconds = 0;
 				while(!actionFired){
 					try {
-						sleep(125);
-						seconds += 0.125 ;
+						sleep(1);
+						seconds += 0.001 ;
 						if(seconds >= getVELOCITY()){
 							fireAction("nodetour");
 							return;
@@ -127,7 +127,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 	{
 		actionFired = true;
 		try {
-			sleep(250);
+			sleep(2);
 		}catch (Exception e){
 		}
 		super.fireAction(name);
