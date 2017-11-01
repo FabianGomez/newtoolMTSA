@@ -17,14 +17,14 @@ import static java.lang.Thread.sleep;
 public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRandomScheduler<State, Action> {
 
 	private boolean actionFired = false;
-	public final static String SCHEDULLERNAME = "GridSimulationAdaptedUIRandomScheduler";
+	public final static String SCHEDULERNAME = "GridSimulationAdaptedUIRandomScheduler";
 
 	private final static double VELOCITYSLOW = 5;
 	private final static double VELOCITYNORMAL = 2;
 	private final static double VELOCITYFAST = 1;
 	private final static double VELOCITYTOOFAST = 0.002;
 
-	private JComboBox velocitytList;
+	private JComboBox velocityList;
 
 	public GridSimulationAdaptedUIRandomScheduler(String name, LTS<State, Action> lts,
 												  Set<Action> controllableActions) {
@@ -45,10 +45,10 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 		uiControllerGui.setTitle(this.getName());
 
 		String[] velocityStrings = { "SLOW", "NORMAL", "FAST", "TOOFAST" };
-		velocitytList = new JComboBox(velocityStrings);
-		velocitytList.setSelectedIndex(1);
+		velocityList = new JComboBox(velocityStrings);
+		velocityList.setSelectedIndex(1);
 		Container panel = uiControllerGui.getContentPane();
-		panel.add(velocitytList, BorderLayout.PAGE_END);
+		panel.add(velocityList, BorderLayout.PAGE_END);
 
 
 		KeyboardFocusManager.getCurrentKeyboardFocusManager()
@@ -123,8 +123,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 	}
 
 	@Override
-	public void fireAction(String name)
-	{
+	public void fireAction(String name)	{
 		actionFired = true;
 		try {
 			sleep(2);
@@ -135,7 +134,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 	}
 
 	private double getVELOCITY(){
-		switch(velocitytList.getSelectedIndex()) {
+		switch(velocityList.getSelectedIndex()) {
 			case 0:
 				return GridSimulationAdaptedUIRandomScheduler.VELOCITYSLOW;
 			case 1:

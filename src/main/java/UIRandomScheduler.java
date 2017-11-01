@@ -148,8 +148,6 @@ public class UIRandomScheduler<State, Action> extends BaseController<State, Acti
 				}
 			});
 
-
-
 		this.uiControllerGui.setVisible(true);
 	}
 	

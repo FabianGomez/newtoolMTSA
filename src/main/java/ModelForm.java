@@ -147,7 +147,7 @@ public class ModelForm {
                         List<String> schedulerNames = schedulerFactory.getSchedulersList();
                         int indexSchedulerGridEnvironment = -1;
                         for(int index=0;index < schedulerNames.size();index++)
-                            if(schedulerNames.get(index).equals(GridSimulationAdaptedUIRandomScheduler.SCHEDULLERNAME))
+                            if(schedulerNames.get(index).equals(GridSimulationAdaptedUIRandomScheduler.SCHEDULERNAME))
                                 indexSchedulerGridEnvironment = index;
                         if (indexSchedulerGridEnvironment == -1) {
                             JOptionPane.showMessageDialog(null, "Scheduler 'GridSimulationAdaptedUIRandomScheduler' not found", "Error", 1, null);
