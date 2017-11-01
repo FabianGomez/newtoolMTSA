@@ -206,11 +206,10 @@ public class MainForm {
     private CellPane initialCellPane;
 
     public void listenerEndChangeCell(int x, int y){
-        CellPane endCellPane = (CellPane) grid.findComponentAt(x,y);
+        CellPane endCellPane = (CellPane) grid.findComponentAt(x - grid.getLocationOnScreen().x,y - grid.getLocationOnScreen().y);
 
         int column = endCellPane.getCell().getColumn();
         int row = endCellPane.getCell().getRow();
-
 
 
         switch (currentAction) {
@@ -231,6 +230,8 @@ public class MainForm {
                 endCellPane.setCell(new DangerCell(row, column));
                 break;
         }
+        endCellPane.paint();
+
     }
 
     public void listenerStartChangeCell(CellPane cellPane){

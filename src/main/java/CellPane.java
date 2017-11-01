@@ -38,7 +38,6 @@ public class CellPane extends JPanel {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     mainForm.listenerEndChangeCell(e.getLocationOnScreen().x, e.getLocationOnScreen().y);
-
                 }
             });
         }
