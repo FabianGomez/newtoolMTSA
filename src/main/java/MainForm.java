@@ -211,26 +211,41 @@ public class MainForm {
         int column = endCellPane.getCell().getColumn();
         int row = endCellPane.getCell().getRow();
 
+        int minRow = initialCellPane.getCell().getRow() < row ? initialCellPane.getCell().getRow() : row ;
+        int minColumn = initialCellPane.getCell().getColumn() < column ? initialCellPane.getCell().getColumn() : column ;
 
-        switch (currentAction) {
-            case CLEAR:
-                endCellPane.setCell(new EmptyCell(row, column));
-                break;
-            case ADDINGSTART:
-                Map map = ((Grid) grid).getMap();
-                if(map.getInitialCell() == null)
-                    endCellPane.setCell(new InitialCell(row, column));
-                else
-                    JOptionPane.showMessageDialog(null, "There is an initial cell", "Error", 1, null);
-                break;
-            case ADDINGGOAL:
-                endCellPane.setCell(new GoalCell(currentGoal, row, column));
-                break;
-            case ADDINGDANGER:
-                endCellPane.setCell(new DangerCell(row, column));
-                break;
+        int maxRow = initialCellPane.getCell().getRow() >= row ? initialCellPane.getCell().getRow() : row ;
+        int maxColumn = initialCellPane.getCell().getColumn() >= column ? initialCellPane.getCell().getColumn() : column ;
+
+        for(int indexRow = minRow ;  indexRow <= maxRow ; indexRow++){
+            for(int indexColumn = minColumn ;  indexColumn <= maxColumn ; indexColumn++) {
+                CellPane actualCellPane = ((Grid) grid).getCell(indexRow, indexColumn);
+                switch (currentAction) {
+                    case CLEAR:
+                        actualCellPane.setCell(new EmptyCell(indexRow, indexColumn));
+                        break;
+                    case ADDINGSTART:
+                        Map map = ((Grid) grid).getMap();
+                        if(map.getInitialCell() == null)
+                            actualCellPane.setCell(new InitialCell(indexRow, indexColumn));
+                        else
+                            JOptionPane.showMessageDialog(null, "There is an initial cell", "Error", 1, null);
+                        break;
+                    case ADDINGGOAL:
+                        actualCellPane.setCell(new GoalCell(currentGoal, indexRow, indexColumn));
+                        break;
+                    case ADDINGDANGER:
+                        actualCellPane.setCell(new DangerCell(indexRow, indexColumn));
+                        break;
+                }
+                actualCellPane.paint();
+                if(currentAction == ADDINGSTART)
+                    break;
+
+            }
         }
-        endCellPane.paint();
+
+        initialCellPane = null;
 
     }
 

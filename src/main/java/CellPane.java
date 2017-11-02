@@ -26,19 +26,13 @@ public class CellPane extends JPanel {
                 }
 
                 @Override
-                public void mouseClicked(MouseEvent e) {
-
-                }
-
-                @Override
                 public void mousePressed(MouseEvent e) {
                     mainForm.listenerStartChangeCell(CellPane.this);
                 }
 
                 @Override
-                public void mouseReleased(MouseEvent e) {
-                    mainForm.listenerEndChangeCell(e.getLocationOnScreen().x, e.getLocationOnScreen().y);
-                }
+                public void mouseReleased(MouseEvent e) { mainForm.listenerEndChangeCell(e.getLocationOnScreen().x, e.getLocationOnScreen().y); }
+
             });
         }
     }
@@ -73,6 +67,7 @@ public class CellPane extends JPanel {
         setBackground(color);
         this.setVisible(true);
     }
+
     public void endMomentarilyPaint(){
         this.setVisible(false);
         setBackground(defaultBackground );
