@@ -9,9 +9,7 @@ public class CellPane extends JPanel {
 
     private Color defaultBackground;
     private Cell cell;
-    private MainForm mainForm;
     public CellPane(boolean modified, final MainForm mainForm) {
-        this.mainForm = mainForm;
         if(modified) {
             addMouseListener(new MouseAdapter() {
                 @Override
@@ -31,7 +29,9 @@ public class CellPane extends JPanel {
                 }
 
                 @Override
-                public void mouseReleased(MouseEvent e) { mainForm.listenerEndChangeCell(e.getLocationOnScreen().x, e.getLocationOnScreen().y); }
+                public void mouseReleased(MouseEvent e) {
+                    mainForm.listenerEndChangeCell(e.getLocationOnScreen().x, e.getLocationOnScreen().y);
+                }
 
             });
         }

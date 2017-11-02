@@ -139,10 +139,8 @@ public class UIRandomScheduler<State, Action> extends BaseController<State, Acti
 						JButton sourceButton = (JButton) e.getSource();
 						String srcName = sourceButton.getName();
 						uiControllerGui.removeActions();
-						
 						fireAction(srcName);
 					}
-					
 				}
 			});
 

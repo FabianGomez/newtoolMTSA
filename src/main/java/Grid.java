@@ -9,7 +9,6 @@ public class Grid extends JPanel {
     List<List<CellPane>> cells;
 
     public Grid(Map map, boolean modified, MainForm mainForm) {
-
         GridBagLayout grid = new GridBagLayout();
         setLayout(grid);
         cells = new ArrayList<List<CellPane>>();
@@ -22,8 +21,7 @@ public class Grid extends JPanel {
 
                 CellPane cellPane = new CellPane(modified, mainForm);
                 cellPane.setCell(new EmptyCell(row,col));
-                Border border = null;
-                border = new MatteBorder(1, 1, 1, 1, Color.BLACK);
+                Border border = new MatteBorder(1, 1, 1, 1, Color.BLACK);
 
                 cellPane.setBorder(border);
                 add(cellPane, gbc);
