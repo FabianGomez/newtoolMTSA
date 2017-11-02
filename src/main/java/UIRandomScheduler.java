@@ -22,7 +22,7 @@ public class UIRandomScheduler<State, Action> extends BaseController<State, Acti
 
 	public UIControllerGui uiControllerGui = null;
 	private Logger logger = LogManager.getLogger(RandomController.class.getName());
-	private List<Action> optUnControllableActions;
+	public List<Action> optUnControllableActions;
 
 	public UIRandomScheduler(String name, LTS<State, Action> lts,
                              Set<Action> controllableActions) {

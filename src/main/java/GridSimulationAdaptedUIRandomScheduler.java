@@ -27,6 +27,8 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 
 	private JComboBox velocityList;
 
+	private KeyEventDispatcher keyEventDispatcher;
+
 	public GridSimulationAdaptedUIRandomScheduler(String name, LTS<State, Action> lts,
 												  Set<Action> controllableActions) {
 		super(name, lts, controllableActions);
@@ -51,45 +53,6 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 		Container panel = uiControllerGui.getContentPane();
 		panel.add(velocityList, BorderLayout.PAGE_END);
 
-
-		KeyboardFocusManager.getCurrentKeyboardFocusManager()
-				.addKeyEventDispatcher(new KeyEventDispatcher() {
-					public boolean dispatchKeyEvent(KeyEvent e) {
-
-						if (e.getID() == KeyEvent.KEY_RELEASED) {
-							return  false;
-						}
-
-						String action = "";
-
-						int keyCode = e.getKeyCode();
-						switch( keyCode ) {
-							case KeyEvent.VK_UP:
-								action = "detour.n";
-								break;
-							case KeyEvent.VK_DOWN:
-								action = "detour.s";
-								break;
-							case KeyEvent.VK_LEFT:
-								action = "detour.w";
-								break;
-							case KeyEvent.VK_RIGHT :
-								action = "detour.e";
-								break;
-							case KeyEvent.VK_SPACE :
-								action = "nodetour";
-								break;
-						}
-
-						if(action.equals(""))
-							return false;
-
-						uiControllerGui.removeActions();
-						fireAction(action);
-
-						return false;
-					}
-				});
 	}
 
 	@Override
@@ -100,6 +63,54 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 		Pair<Action, State> currentPair	= lts.getTransitions(currentState).iterator().next();
 		if(controllableActions.contains(currentPair.getFirst()))
 			return;
+
+		try {
+			if(keyEventDispatcher != null)
+				KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(keyEventDispatcher);
+		}catch (Exception e){
+		}
+
+		keyEventDispatcher = new KeyEventDispatcher() {
+			public boolean dispatchKeyEvent(KeyEvent e) {
+
+				if (e.getID() == KeyEvent.KEY_RELEASED) {
+					return  false;
+				}
+
+				String action = "";
+
+				int keyCode = e.getKeyCode();
+				switch( keyCode ) {
+					case KeyEvent.VK_UP:
+						action = "detour.n";
+						break;
+					case KeyEvent.VK_DOWN:
+						action = "detour.s";
+						break;
+					case KeyEvent.VK_LEFT:
+						action = "detour.w";
+						break;
+					case KeyEvent.VK_RIGHT :
+						action = "detour.e";
+						break;
+					case KeyEvent.VK_SPACE :
+						action = "nodetour";
+						break;
+				}
+
+				if(action.equals(""))
+					return false;
+
+				if(optUnControllableActions.contains(action)) {
+					uiControllerGui.removeActions();
+					fireAction(action);
+				}
+
+				return false;
+			}
+		};
+
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(keyEventDispatcher);
 
 		actionFired = false;
 		new Thread()
@@ -128,6 +139,8 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 	public void fireAction(String name)	{
 		actionFired = true;
 		try {
+			if(keyEventDispatcher != null)
+				KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(keyEventDispatcher);
 			sleep(2);
 		}catch (Exception e){
 		}
