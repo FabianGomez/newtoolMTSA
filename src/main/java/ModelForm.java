@@ -2,7 +2,6 @@ import ltsa.control.util.ControlConstants;
 import ltsa.dispatcher.TransitionSystemDispatcher;
 import ltsa.enactment.EnactmentOptions;
 import ltsa.enactment.EnactorFactory;
-import ltsa.enactment.MTSAEnactmentSimulation;
 import ltsa.enactment.SchedulerFactory;
 import ltsa.lts.CompositeState;
 import ltsa.lts.LTSCompiler;
@@ -140,7 +139,7 @@ public class ModelForm {
                     if(controller != null){
                         map.saveTemp();
 
-                        MTSAEnactmentSimulation simulation = new MTSAEnactmentSimulation();
+                        MTSAEnactmentSimulationWithoutWindow simulation = new MTSAEnactmentSimulationWithoutWindow();
                         EnactmentOptions enactmentOptions = new EnactmentOptions();
 
                         //Set the Scheduller

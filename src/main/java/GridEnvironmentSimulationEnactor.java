@@ -1,13 +1,7 @@
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.Enactor;
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.TransitionEvent;
-import MTSAEnactment.ar.uba.dc.lafhis.enactment.robot.PainterEnvironmentUI;
-import MTSAEnactment.ar.uba.dc.lafhis.enactment.robot.RobotAdapter;
 
-import javax.imageio.ImageIO;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 
 /**

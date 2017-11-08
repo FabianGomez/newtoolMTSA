@@ -1,10 +1,6 @@
-import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+
 
 public class GridEnviromentSimulationUI extends JFrame {
     private JPanel gridPanel;
