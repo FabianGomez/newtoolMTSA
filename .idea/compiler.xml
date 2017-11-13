@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Fabi" />
         <module name="mtsa" />
-        <module name="newtoolMTSA" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Fabi" target="1.8" />
       <module name="mtsa" target="1.8" />
-      <module name="newtoolMTSA" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
