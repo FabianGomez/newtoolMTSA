@@ -169,11 +169,15 @@ public class Model {
         for(Integer goalId :  map.getGoalCells().keySet()){
             List<GoalCell> goalCells =  map.getGoalCells().get(goalId);
             int goalRelativeIndex = 1;
+            String goalDefinition = "assert G" + goalId + " = ";
             for(GoalCell goalCell : goalCells)
             {
-                definition.add("assert G" + goalId + "_" + goalRelativeIndex + " = G[GoalRow_" + goalId + "_" + goalRelativeIndex + "][GoalColumn_" + goalId + "_" + goalRelativeIndex + "]");
+                goalDefinition += " G[GoalRow_" + goalId + "_" + goalRelativeIndex + "][GoalColumn_" + goalId + "_" + goalRelativeIndex + "] || " ;
                 goalRelativeIndex++;
             }
+            goalDefinition += "x";
+            goalDefinition = goalDefinition.replace("|| x","");
+            definition.add(goalDefinition);
         }
         return definition;
     }
@@ -195,11 +199,7 @@ public class Model {
         for(Integer goalId : goalIds)
         {
             List<GoalCell> goalCells =  map.getGoalCells().get(goalId);
-            int goalRelativeIndex = 1;
-            for(GoalCell goalCell : goalCells) {
-                liveness += "G" + goalId + "_" + goalRelativeIndex + ",";
-                goalRelativeIndex++;
-            }
+            liveness += "G" + goalId + ",";
         }
         liveness += "}";
         liveness = liveness.replace(",}","}");

@@ -38,11 +38,10 @@ public class GridEnviromentSimulationUI extends JFrame {
             }
         });
 
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setSize(800, 300);
         setLayout(new BorderLayout(5,5));
         add(gridPanel, BorderLayout.NORTH);
-
         repaint();
     }
 
@@ -58,4 +57,7 @@ public class GridEnviromentSimulationUI extends JFrame {
         actual.startMomentarilyPaint(ACTUALCOLOR);
     }
 
+    public void tearDown() {
+        frame.dispose();
+    }
 }

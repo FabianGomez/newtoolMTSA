@@ -1,6 +1,7 @@
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.Enactor;
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.TransitionEvent;
 
+import javax.swing.*;
 import java.awt.event.WindowEvent;
 
 
@@ -77,7 +78,7 @@ public class GridEnvironmentSimulationEnactor<State, Action> extends
     @Override
     public void tearDown() {
         System.out.println("TEAR DOWN");
-        simulationWindow.dispatchEvent(new WindowEvent(simulationWindow, WindowEvent.WINDOW_CLOSING));
+        simulationWindow.tearDown();
     }
 }
 

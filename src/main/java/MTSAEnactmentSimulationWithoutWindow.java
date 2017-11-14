@@ -153,12 +153,16 @@ public class MTSAEnactmentSimulationWithoutWindow implements Runnable {
                 e.printStackTrace();
             }
         }
+        onClose();
+    }
+
+    private void onClose(){
         this.getLogger().info("Simulation ended");
-        controllerScheduler.stop();
-        controllerScheduler.tearDown();
         for (Enactor<Long, String> enactor : this.enactors)
         {
             enactor.tearDown();
         }
+        controllerScheduler.tearDown();
+
     }
 }

@@ -4,6 +4,8 @@ import MTSTools.ac.ic.doc.mtstools.model.LTS;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.lang.management.GarbageCollectorMXBean;
 import java.util.Set;
@@ -26,7 +28,6 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 	private final static double VELOCITYTOOFAST = 0.002;
 
 	private JComboBox velocityList;
-
 	private KeyEventDispatcher keyEventDispatcher;
 
 	public GridSimulationAdaptedUIRandomScheduler(String name, LTS<State, Action> lts,
@@ -50,9 +51,10 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 		String[] velocityStrings = { "SLOW", "NORMAL", "FAST", "TOOFAST" };
 		velocityList = new JComboBox(velocityStrings);
 		velocityList.setSelectedIndex(1);
+
 		Container panel = uiControllerGui.getContentPane();
 		panel.add(velocityList, BorderLayout.PAGE_END);
-
+		uiControllerGui.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	}
 
 	@Override
