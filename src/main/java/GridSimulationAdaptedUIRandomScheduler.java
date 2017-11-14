@@ -22,10 +22,10 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 	private boolean actionFired = false;
 	public final static String SCHEDULERNAME = "GridSimulationAdaptedUIRandomScheduler";
 
-	private final static double VELOCITYSLOW = 5;
-	private final static double VELOCITYNORMAL = 2;
-	private final static double VELOCITYFAST = 1;
-	private final static double VELOCITYTOOFAST = 0.002;
+	private final static double VELOCITYSLOW = 0.5;
+	private final static double VELOCITYNORMAL = 0.1;
+	private final static double VELOCITYFAST = 0.002;
+	private final static double VELOCITYTOOFAST = 0.0005;
 
 	private JComboBox velocityList;
 	private KeyEventDispatcher keyEventDispatcher;
@@ -113,7 +113,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 		};
 
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(keyEventDispatcher);
-
+		sleep(0,1);
 		actionFired = false;
 		new Thread()
 		{
@@ -121,8 +121,8 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 				double seconds = 0;
 				while(!actionFired){
 					try {
-						sleep(1);
-						seconds += 0.001 ;
+						sleep(0,1);
+						seconds += 0.0001 ;
 						if(seconds >= getVELOCITY()){
 							fireAction("nodetour");
 							return;
@@ -143,7 +143,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 		try {
 			if(keyEventDispatcher != null)
 				KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(keyEventDispatcher);
-			sleep(2);
+			sleep(0,2);
 		}catch (Exception e){
 		}
 		super.fireAction(name);
