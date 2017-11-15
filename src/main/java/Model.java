@@ -169,14 +169,14 @@ public class Model {
         for(Integer goalId :  map.getGoalCells().keySet()){
             List<GoalCell> goalCells =  map.getGoalCells().get(goalId);
             int goalRelativeIndex = 1;
-            String goalDefinition = "assert G" + goalId + " = ";
+            String goalDefinition = "assert G" + goalId + " = (";
             for(GoalCell goalCell : goalCells)
             {
                 goalDefinition += " G[GoalRow_" + goalId + "_" + goalRelativeIndex + "][GoalColumn_" + goalId + "_" + goalRelativeIndex + "] || " ;
                 goalRelativeIndex++;
             }
             goalDefinition += "x";
-            goalDefinition = goalDefinition.replace("|| x","");
+            goalDefinition = goalDefinition.replace("|| x",")");
             definition.add(goalDefinition);
         }
         return definition;
