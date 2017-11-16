@@ -53,6 +53,11 @@ public class MapParser {
                         map.addDangerCell(cell);
                         //System.out.println("DANGER on:" + currentRow + "," + currentColumn);
                     }
+                    if(tryParseWallCell(splitedCurrentLine[currentColumn])){
+                        WallCell cell = new WallCell(currentRow, currentColumn);
+                        map.addWallCell(cell);
+                        //System.out.println("DANGER on:" + currentRow + "," + currentColumn);
+                    }
                 }
                 currentRow++;
             }
@@ -107,6 +112,10 @@ public class MapParser {
             gridParsed.get(cell.getRow()).add(cell.getColumn(),cell.getValue());
         }
 
+        for(WallCell cell : map.getWallCells()) {
+            gridParsed.get(cell.getRow()).remove(cell.getColumn());
+            gridParsed.get(cell.getRow()).add(cell.getColumn(),cell.getValue());
+        }
         gridParsed.get(map.getInitialCell().getRow()).remove(map.getInitialCell().getColumn());
         gridParsed.get(map.getInitialCell().getRow()).add(map.getInitialCell().getColumn(),map.getInitialCell().getValue());
 
@@ -132,11 +141,14 @@ public class MapParser {
         }
         return false;
     }
+    private static boolean tryParseWallCell(String value) {
+        return value.equals(WallCell.CONSTVALUE());
+    }
     private static boolean tryParseDangerCell(String value) {
-        return value.equals("!");
+        return value.equals(DangerCell.CONSTVALUE());
     }
     private static boolean tryParseInitial(String value) {
-        return value.equals("@");
+        return value.equals(InitialCell.CONSTVALUE());
     }
 
 }

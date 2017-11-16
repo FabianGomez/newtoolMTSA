@@ -40,7 +40,10 @@ public class Grid extends JPanel {
             CellPane cellPane = (cells.get(cell.getRow())).get(cell.getColumn());
             cellPane.setCell(cell);
         }
-
+        for(WallCell cell : map.getWallCells()){
+            CellPane cellPane = (cells.get(cell.getRow())).get(cell.getColumn());
+            cellPane.setCell(cell);
+        }
         for(Integer goalId :  map.getGoalCells().keySet()) {
             List<GoalCell> goalCells = map.getGoalCells().get(goalId);
             for (GoalCell cell : goalCells) {
@@ -77,6 +80,8 @@ public class Grid extends JPanel {
                     map.addGoal((GoalCell) cellPane.getCell());
                 if(cellPane.getCell().getClass().equals(DangerCell.class))
                     map.addDangerCell((DangerCell) cellPane.getCell());
+                if(cellPane.getCell().getClass().equals(WallCell.class))
+                    map.addWallCell((WallCell) cellPane.getCell());
                 if(cellPane.getCell().getClass().equals(InitialCell.class))
                     map.setInitialCell((InitialCell) cellPane.getCell());
             }

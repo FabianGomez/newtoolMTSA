@@ -13,6 +13,7 @@ public class Model {
         lines.addAll(Size(map));
         lines.addAll(StartingPosition(map));
         lines.addAll(GoalsPosition(map));
+        lines.addAll(WallDefinition(map));
         //lines.addAll(DangerPosition(map));
         lines.addAll(Enviroment());
         lines.addAll(Fluents(map));
@@ -103,6 +104,27 @@ public class Model {
         }
         return definition;
     }
+    private static List<String> WallDefinition(Map map)    {
+        List<String> definition = new LinkedList<String>();
+
+        String lineDefinition = "def Wall(row,col) = ";
+
+        if(map.getWallCells().size() == 0) {
+            lineDefinition += "row == -1";
+            definition.add(lineDefinition);
+            return definition;
+        }
+
+        for(WallCell cell: map.getWallCells())
+            lineDefinition += " row == " + cell.getRow() + " && col == " + cell.getColumn() + " || " ;
+        lineDefinition += "!";
+        lineDefinition = lineDefinition.replace("|| !","");
+
+        definition.add(lineDefinition);
+
+        return definition;
+
+    }
     private static List<String> Enviroment()    {
         List<String> definition = new LinkedList<String>();
         definition.add("set Gotos = {{go}.{s,n,e,w}}");
@@ -116,16 +138,16 @@ public class Model {
 
         definition.add("GRID = POS[StartingRow][StartingColumn],");
         definition.add("POS[row:RRow][col:RCol] =");
-        definition.add("    ( when (row<SizeRow) go.s-> GOING_TO[row+1][col]");
-        definition.add("    | when (col<SizeCol) go.e-> GOING_TO[row][col+1]");
-        definition.add("    | when (row>0) go.n -> GOING_TO[row-1][col]");
-        definition.add("    | when (col>0) go.w -> GOING_TO[row][col-1]),");
+        definition.add("    ( when ((!Wall(row+1,col)) && row<SizeRow ) go.s-> GOING_TO[row+1][col] ");
+        definition.add("    | when ((!Wall(row,col+1)) && col<SizeCol ) go.e-> GOING_TO[row][col+1] ");
+        definition.add("    | when ((!Wall(row-1,col)) && row>0 ) go.n -> GOING_TO[row-1][col] ");
+        definition.add("    | when ((!Wall(row,col-1)) && col>0 ) go.w -> GOING_TO[row][col-1] ),");
 
-        definition.add("GOING_TO[row:RRow][col:RCol] = ( nodetour -> arrive[row][col] -> POS[row][col]");
-        definition.add("    | when (row>0) detour.n -> arrive[row-1][col] -> POS[row-1][col]");
-        definition.add("    | when (row<SizeRow) detour.s -> arrive[row+1][col] -> POS[row+1][col]");
-        definition.add("    | when (col>0) detour.w ->  arrive[row][col-1] ->POS[row][col-1]");
-        definition.add("    | when (col<SizeCol) detour.e -> arrive[row][col+1] -> POS[row][col+1]");
+        definition.add("GOING_TO[row:RRow][col:RCol] = ( nodetour -> arrive[row][col] -> POS[row][col] ");
+        definition.add("    | when ((!Wall(row-1,col)) && row>0) detour.n -> arrive[row-1][col] -> POS[row-1][col] ");
+        definition.add("    | when ((!Wall(row+1,col)) && row<SizeRow) detour.s -> arrive[row+1][col] -> POS[row+1][col] ");
+        definition.add("    | when ((!Wall(row,col-1)) && col>0) detour.w ->  arrive[row][col-1] ->POS[row][col-1] ");
+        definition.add("    | when ((!Wall(row,col+1)) && col<SizeCol) detour.e -> arrive[row][col+1] -> POS[row][col+1] ");
         definition.add(")+{Gotos,Arrivals,Detours,Nodetour}.");
 
         definition.add("DRONE = ({Gotos}->USER),");

@@ -1,12 +1,13 @@
 import java.awt.*;
 
-public class DangerCell extends Cell{
-    public DangerCell(int row, int column){
+public class WallCell  extends Cell{
+
+    public WallCell(int row, int column){
         super(CONSTVALUE(),row,column);
     }
     @Override
     public String getValue() {
-        return DangerCell.CONSTVALUE();
+        return WallCell.CONSTVALUE();
     }
     @Override
     public String getLabelValue() {
@@ -14,9 +15,10 @@ public class DangerCell extends Cell{
     }
     @Override
     public Color getColor() {
-        return Color.RED;
+        return Color.BLACK;
     }
 
     private static final String CONSTLABELVALUE() { return ""; }
-    public static final String CONSTVALUE() { return "!"; }
+    public static final String CONSTVALUE() { return "x"; }
+
 }

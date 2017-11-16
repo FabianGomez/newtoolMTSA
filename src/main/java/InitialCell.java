@@ -21,7 +21,7 @@ public class InitialCell extends Cell{
     private static final String CONSTLABELVALUE() {
         return CONSTVALUE();
     }
-    private static final String CONSTVALUE() {
+    public static final String CONSTVALUE() {
         return "@";
     }
 }
