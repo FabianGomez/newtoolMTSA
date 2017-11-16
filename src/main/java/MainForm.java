@@ -23,13 +23,14 @@ public class MainForm {
     private JPanel buttonsPanel;
     private JPanel formPannel;
     private JButton clearButton;
+    private JButton wallButton;
     private JFrame frame;
 
     private static final int CLEAR = 0;
     private static final int ADDINGSTART = 1;
     private static final int ADDINGDANGER = 2;
     private static final int ADDINGGOAL = 3;
-
+    private static final int ADDINGWALL = 4;
     private int currentGoal;
 
     public static void main(String[] args) {
@@ -177,7 +178,16 @@ public class MainForm {
                 }
             }
         });
-
+        wallButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (currentAction == -1) {
+                    startChangeMap(ADDINGWALL, wallButton);
+                } else {
+                    wallButton.setBackground(startButton.getBackground());
+                    finishChangeMap();
+                }
+            }
+        });
 
     }
 
@@ -185,6 +195,7 @@ public class MainForm {
         clearButton.setEnabled(enabled);
         startButton.setEnabled(enabled);
         goalButton.setEnabled(enabled);
+        wallButton.setEnabled(enabled);
         dangerButton.setEnabled(enabled);
         buttonOpen.setEnabled(enabled);
         buttonGenerate.setEnabled(enabled);
@@ -236,6 +247,9 @@ public class MainForm {
                         break;
                     case ADDINGDANGER:
                         actualCellPane.setCell(new DangerCell(indexRow, indexColumn));
+                        break;
+                    case ADDINGWALL:
+                        actualCellPane.setCell(new WallCell(indexRow, indexColumn));
                         break;
                 }
                 actualCellPane.paint();
