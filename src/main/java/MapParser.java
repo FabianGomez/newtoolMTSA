@@ -56,7 +56,12 @@ public class MapParser {
                     if(tryParseWallCell(splitedCurrentLine[currentColumn])){
                         WallCell cell = new WallCell(currentRow, currentColumn);
                         map.addWallCell(cell);
-                        //System.out.println("DANGER on:" + currentRow + "," + currentColumn);
+                        //System.out.println("WALL on:" + currentRow + "," + currentColumn);
+                    }
+                    if(tryParseDoorCell(splitedCurrentLine[currentColumn])){
+                        DoorCell cell = new DoorCell(currentRow, currentColumn);
+                        map.addDoorCell(cell);
+                        //System.out.println("DOOR on:" + currentRow + "," + currentColumn);
                     }
                 }
                 currentRow++;
@@ -116,6 +121,12 @@ public class MapParser {
             gridParsed.get(cell.getRow()).remove(cell.getColumn());
             gridParsed.get(cell.getRow()).add(cell.getColumn(),cell.getValue());
         }
+
+        for(DoorCell cell : map.getDoorCells()) {
+            gridParsed.get(cell.getRow()).remove(cell.getColumn());
+            gridParsed.get(cell.getRow()).add(cell.getColumn(),cell.getValue());
+        }
+
         gridParsed.get(map.getInitialCell().getRow()).remove(map.getInitialCell().getColumn());
         gridParsed.get(map.getInitialCell().getRow()).add(map.getInitialCell().getColumn(),map.getInitialCell().getValue());
 
@@ -143,6 +154,9 @@ public class MapParser {
     }
     private static boolean tryParseWallCell(String value) {
         return value.equals(WallCell.CONSTVALUE());
+    }
+    private static boolean tryParseDoorCell(String value) {
+        return value.equals(DoorCell.CONSTVALUE());
     }
     private static boolean tryParseDangerCell(String value) {
         return value.equals(DangerCell.CONSTVALUE());

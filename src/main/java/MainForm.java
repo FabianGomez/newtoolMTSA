@@ -24,6 +24,7 @@ public class MainForm {
     private JPanel formPannel;
     private JButton clearButton;
     private JButton wallButton;
+    private JButton doorButton;
     private JFrame frame;
 
     private static final int CLEAR = 0;
@@ -31,6 +32,7 @@ public class MainForm {
     private static final int ADDINGDANGER = 2;
     private static final int ADDINGGOAL = 3;
     private static final int ADDINGWALL = 4;
+    private static final int ADDINGDOOR = 5;
     private int currentGoal;
 
     public static void main(String[] args) {
@@ -188,6 +190,16 @@ public class MainForm {
                 }
             }
         });
+        doorButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (currentAction == -1) {
+                    startChangeMap(ADDINGDOOR, doorButton);
+                } else {
+                    doorButton.setBackground(startButton.getBackground());
+                    finishChangeMap();
+                }
+            }
+        });
 
     }
 
@@ -196,6 +208,7 @@ public class MainForm {
         startButton.setEnabled(enabled);
         goalButton.setEnabled(enabled);
         wallButton.setEnabled(enabled);
+        doorButton.setEnabled(enabled);
         dangerButton.setEnabled(enabled);
         buttonOpen.setEnabled(enabled);
         buttonGenerate.setEnabled(enabled);
@@ -250,6 +263,9 @@ public class MainForm {
                         break;
                     case ADDINGWALL:
                         actualCellPane.setCell(new WallCell(indexRow, indexColumn));
+                        break;
+                    case ADDINGDOOR:
+                        actualCellPane.setCell(new DoorCell(indexRow, indexColumn));
                         break;
                 }
                 actualCellPane.paint();
