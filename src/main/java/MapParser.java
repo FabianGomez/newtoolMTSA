@@ -59,7 +59,7 @@ public class MapParser {
                         //System.out.println("WALL on:" + currentRow + "," + currentColumn);
                     }
                     if(tryParseDoorCell(splitedCurrentLine[currentColumn])){
-                        DoorCell cell = new DoorCell(currentRow, currentColumn);
+                        DoorCell cell = new DoorCell(currentRow, currentColumn,map.getDoorCells().size());
                         map.addDoorCell(cell);
                         //System.out.println("DOOR on:" + currentRow + "," + currentColumn);
                     }

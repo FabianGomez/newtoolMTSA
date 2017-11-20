@@ -244,12 +244,12 @@ public class MainForm {
         for(int indexRow = minRow ;  indexRow <= maxRow ; indexRow++){
             for(int indexColumn = minColumn ;  indexColumn <= maxColumn ; indexColumn++) {
                 CellPane actualCellPane = ((Grid) grid).getCell(indexRow, indexColumn);
+                Map map = ((Grid) grid).getMap();
                 switch (currentAction) {
                     case CLEAR:
                         actualCellPane.setCell(new EmptyCell(indexRow, indexColumn));
                         break;
                     case ADDINGSTART:
-                        Map map = ((Grid) grid).getMap();
                         if(map.getInitialCell() == null)
                             actualCellPane.setCell(new InitialCell(indexRow, indexColumn));
                         else
@@ -265,7 +265,7 @@ public class MainForm {
                         actualCellPane.setCell(new WallCell(indexRow, indexColumn));
                         break;
                     case ADDINGDOOR:
-                        actualCellPane.setCell(new DoorCell(indexRow, indexColumn));
+                        actualCellPane.setCell(new DoorCell(indexRow, indexColumn, map.getDoorCells().size()));
                         break;
                 }
                 actualCellPane.paint();

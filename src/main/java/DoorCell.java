@@ -2,8 +2,11 @@ import java.awt.*;
 
 public class DoorCell extends Cell{
 
-    public DoorCell(int row, int column){
+    public int index;
+
+    public DoorCell(int row, int column, int index){
         super(CONSTVALUE(),row,column);
+        this.index = index;
     }
     @Override
     public String getValue() {
@@ -11,14 +14,15 @@ public class DoorCell extends Cell{
     }
     @Override
     public String getLabelValue() {
-        return CONSTLABELVALUE();
+        return "" + getIndex();
     }
     @Override
     public Color getColor() {
         return Color.ORANGE;
     }
 
-    private static final String CONSTLABELVALUE() { return DoorCell.CONSTVALUE(); }
+    public int getIndex(){return index;}
+
     public static final String CONSTVALUE() { return "#"; }
 
 }
