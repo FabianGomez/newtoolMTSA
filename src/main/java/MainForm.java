@@ -265,13 +265,17 @@ public class MainForm {
                         actualCellPane.setCell(new WallCell(indexRow, indexColumn));
                         break;
                     case ADDINGDOOR:
-                        actualCellPane.setCell(new DoorCell(indexRow, indexColumn, map.getDoorCells().size()));
+                        if(map.getDoorCell() == null)
+                            actualCellPane.setCell(new DoorCell(indexRow, indexColumn));
+                        else
+                            JOptionPane.showMessageDialog(null, "There is a door cell", "Error", 1, null);
                         break;
                 }
                 actualCellPane.paint();
                 if(currentAction == ADDINGSTART)
                     break;
-
+                if(currentAction == ADDINGDOOR)
+                    break;
             }
         }
 

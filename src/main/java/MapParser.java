@@ -59,8 +59,8 @@ public class MapParser {
                         //System.out.println("WALL on:" + currentRow + "," + currentColumn);
                     }
                     if(tryParseDoorCell(splitedCurrentLine[currentColumn])){
-                        DoorCell cell = new DoorCell(currentRow, currentColumn,map.getDoorCells().size());
-                        map.addDoorCell(cell);
+                        DoorCell cell = new DoorCell(currentRow, currentColumn);
+                        map.setDoorCell(cell);
                         //System.out.println("DOOR on:" + currentRow + "," + currentColumn);
                     }
                 }
@@ -122,9 +122,9 @@ public class MapParser {
             gridParsed.get(cell.getRow()).add(cell.getColumn(),cell.getValue());
         }
 
-        for(DoorCell cell : map.getDoorCells()) {
-            gridParsed.get(cell.getRow()).remove(cell.getColumn());
-            gridParsed.get(cell.getRow()).add(cell.getColumn(),cell.getValue());
+        if(map.getDoorCell() != null) {
+            gridParsed.get(map.getDoorCell().getRow()).remove(map.getDoorCell().getColumn());
+            gridParsed.get(map.getDoorCell().getRow()).add(map.getDoorCell().getColumn(),map.getDoorCell().getValue());
         }
 
         gridParsed.get(map.getInitialCell().getRow()).remove(map.getInitialCell().getColumn());
