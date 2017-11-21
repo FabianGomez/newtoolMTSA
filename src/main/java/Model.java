@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.Inet4Address;
 import java.util.*;
 
 public class Model {
@@ -11,13 +10,17 @@ public class Model {
     public Model(String FILENAME, Map map){
         lines = new LinkedList<String>();
         lines.addAll(Size(map));
+        lines.addAll(doorPosition(map));
         lines.addAll(StartingPosition(map));
         lines.addAll(GoalsPosition(map));
         lines.addAll(WallDefinition(map));
+        lines.addAll(DoorDefinition(map));
         //lines.addAll(DangerPosition(map));
         lines.addAll(Enviroment());
-        lines.addAll(Fluents(map));
+        lines.addAll(FluentsDanger(map));
+        lines.addAll(FluentDoor(map));
         lines.addAll(SafeProperty(map));
+        lines.addAll(DoorProperty(map));
         lines.addAll(GoalsAsserts(map));
 
         List<String> linesTemplate = parseTemplate(FILENAME);
@@ -84,6 +87,15 @@ public class Model {
         definition.add("range RRow = 0..SizeRow");
         return definition;
     }
+    private static List<String> doorPosition(Map map)    {
+        List<String> definition = new LinkedList<String>();
+        if(map.getDoorCell() == null)
+            return definition;
+        definition.add("const DoorRow = " + map.getDoorCell().getRow());
+        definition.add("const DoorColumn = " +  map.getDoorCell().getColumn());
+
+        return definition;
+    }
     private static List<String> StartingPosition(Map map)    {
         List<String> definition = new LinkedList<String>();
         definition.add("const StartingRow = " + map.getInitialCell().getRow());
@@ -125,39 +137,65 @@ public class Model {
         return definition;
 
     }
+
+    private static List<String> DoorDefinition(Map map)    {
+        List<String> definition = new LinkedList<String>();
+
+        String lineDefinition = "def DoorAndClosed(row,col) = ";
+
+        if(map.getDoorCell() == null) {
+            lineDefinition += "row == -1";
+            definition.add(lineDefinition);
+            return definition;
+        }
+        
+        lineDefinition += " row == " + map.getDoorCell().getRow() + " && col == " + map.getDoorCell().getColumn() + " && !(DoorOpen)  " ;
+
+
+        definition.add(lineDefinition);
+
+        return definition;
+
+    }
     private static List<String> Enviroment()    {
         List<String> definition = new LinkedList<String>();
         definition.add("set Gotos = {{go}.{s,n,e,w}}");
         definition.add("set Nodetour = {nodetour}");
         definition.add("set Arrivals = {{arrive}.[row:RRow][col:RCol]}");
         definition.add("set Detours = {{detour}.{s,n,e,w}}");
-        definition.add("set ControllableActions = {Gotos,Arrivals}");
+        definition.add("set DoorOpenAction = {open}");
+        definition.add("set DoorCloseAction = {close}");
+
+        definition.add("set ControllableActions = {Gotos,Arrivals,DoorOpenAction,DoorCloseAction}");
         definition.add("set UncontrollableActions = {Nodetour,Detours}");
         definition.add("set Alphabet = {ControllableActions, UncontrollableActions}");
 
 
         definition.add("GRID = POS[StartingRow][StartingColumn],");
         definition.add("POS[row:RRow][col:RCol] =");
-        definition.add("    ( when ((!Wall(row+1,col)) && row<SizeRow ) go.s-> GOING_TO[row+1][col] ");
-        definition.add("    | when ((!Wall(row,col+1)) && col<SizeCol ) go.e-> GOING_TO[row][col+1] ");
-        definition.add("    | when ((!Wall(row-1,col)) && row>0 ) go.n -> GOING_TO[row-1][col] ");
-        definition.add("    | when ((!Wall(row,col-1)) && col>0 ) go.w -> GOING_TO[row][col-1] ),");
+        definition.add("    ( when ((!Wall(row+1,col)) && (!DoorAndClosed(row+1,col)) && row<SizeRow ) go.s-> GOING_TO[row+1][col] ");
+        definition.add("    | when ((!Wall(row,col+1)) && (!DoorAndClosed(row,col+1)) && col<SizeCol ) go.e-> GOING_TO[row][col+1] ");
+        definition.add("    | when ((!Wall(row-1,col)) && (!DoorAndClosed(row-1,col)) && row>0 ) go.n -> GOING_TO[row-1][col] ");
+        definition.add("    | when ((!Wall(row,col-1)) && (!DoorAndClosed(row,col-1)) && col>0 ) go.w -> GOING_TO[row][col-1] ),");
 
         definition.add("GOING_TO[row:RRow][col:RCol] = ( nodetour -> arrive[row][col] -> POS[row][col] ");
-        definition.add("    | when ((!Wall(row-1,col)) && row>0) detour.n -> arrive[row-1][col] -> POS[row-1][col] ");
-        definition.add("    | when ((!Wall(row+1,col)) && row<SizeRow) detour.s -> arrive[row+1][col] -> POS[row+1][col] ");
-        definition.add("    | when ((!Wall(row,col-1)) && col>0) detour.w ->  arrive[row][col-1] ->POS[row][col-1] ");
-        definition.add("    | when ((!Wall(row,col+1)) && col<SizeCol) detour.e -> arrive[row][col+1] -> POS[row][col+1] ");
+        definition.add("    | when ((!Wall(row-1,col)) && (!DoorAndClosed(row-1,col)) && row>0) detour.n -> arrive[row-1][col] -> POS[row-1][col] ");
+        definition.add("    | when ((!Wall(row+1,col)) && (!DoorAndClosed(row+1,col)) && row<SizeRow) detour.s -> arrive[row+1][col] -> POS[row+1][col] ");
+        definition.add("    | when ((!Wall(row,col-1)) && (!DoorAndClosed(row,col-1)) && col>0) detour.w ->  arrive[row][col-1] ->POS[row][col-1] ");
+        definition.add("    | when ((!Wall(row,col+1)) && (!DoorAndClosed(row,col+1)) && col<SizeCol) detour.e -> arrive[row][col+1] -> POS[row][col+1] ");
         definition.add(")+{Gotos,Arrivals,Detours,Nodetour}.");
 
         definition.add("DRONE = ({Gotos}->USER),");
         definition.add("USER = ({Nodetour,Detours}->ARRIVE),");
         definition.add("ARRIVE = ({Arrivals}->DRONE).");
-        definition.add("||ENV = (GRID || DRONE).");
+
+        definition.add("DOOR = ({DoorOpenAction,DoorCloseAction}->DOOR).\n");
+
+        definition.add("||ENV = (GRID || DRONE || DOOR).");
 
         return definition;
     }
-    private static List<String> Fluents(Map map)    {
+    private static List<String> FluentsDanger(Map map)    {
         List<String> definition = new LinkedList<String>();
 
         if(map.getDangerCells().size() == 0)
@@ -177,6 +215,25 @@ public class Model {
         definition.add("}>");
         return definition;
     }
+
+    private static List<String> FluentDoor(Map map)    {
+        List<String> definition = new LinkedList<String>();
+        definition.add("fluent DoorOpen = <{open},{close}> initially 0");
+        return definition;
+    }
+
+    private static List<String> DoorProperty(Map map)    {
+        List<String> definition = new LinkedList<String>();
+        if(map.getDoorCell() == null)
+            return  definition;
+
+        definition.add("ltl_property DoorCorrectActionOpen = [] (open -> X((!open) W close))");
+        definition.add("ltl_property DoorCorrectActionClose =   [] (close -> X((!close) W open))");
+        definition.add("ltl_property DoorCorrectActionOrder = ((!close) W open)");
+
+        return definition;
+    }
+
     private static List<String> SafeProperty(Map map)    {
         List<String> definition = new LinkedList<String>();
         if(map.getDangerCells().size()==0)
@@ -206,7 +263,9 @@ public class Model {
     private static List<String> ControllerSpecLines(Map map)    {
         List<String> definition = new LinkedList<String>();
         if(map.getDangerCells().size() > 0)
-            definition.add("safety = {Safe}");
+            definition.add("safety = {Safe,DoorCorrectActionOpen,DoorCorrectActionClose,DoorCorrectActionOrder}");
+        else
+            definition.add("safety = {DoorCorrectActionOpen,DoorCorrectActionClose,DoorCorrectActionOrder}");
 
         definition.add("controllable = {ControllableActions}");
 
@@ -220,7 +279,6 @@ public class Model {
 
         for(Integer goalId : goalIds)
         {
-            List<GoalCell> goalCells =  map.getGoalCells().get(goalId);
             liveness += "G" + goalId + ",";
         }
         liveness += "}";
