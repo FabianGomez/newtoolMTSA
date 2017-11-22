@@ -1,5 +1,7 @@
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.text.NumberFormat;
 import javax.management.loading.ClassLoaderRepository;
 import javax.swing.*;
@@ -56,7 +58,18 @@ public class MainForm {
                 frame.setVisible(true);
             }
         });
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher( new KeyEventDispatcher() {
+            public boolean dispatchKeyEvent(KeyEvent e) {
 
+                if (e.getID() == KeyEvent.KEY_RELEASED) {
+                    return  false;
+                }
+
+                if(e.getKeyCode() == KeyEvent.VK_ESCAPE && frame.isFocused())
+                    frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+                return false;
+            }
+        });
         buttonOpen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser dialog = new JFileChooser();
