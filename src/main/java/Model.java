@@ -14,28 +14,32 @@ public class Model {
         lines.addAll(StartingPosition(map));
         lines.addAll(GoalsPosition(map));
         //lines.addAll(DangerPosition(map));
-        lines.addAll(Enviroment());
-        lines.addAll(Fluents(map));
-        lines.addAll(SafeProperty(map));
-        lines.addAll(GoalsAsserts(map));
+        //lines.addAll(Enviroment());
+
 
         List<String> linesTemplate = parseTemplate(FILENAME);
         int indexToAdd = -1;
         int index = 0;
         for(String line: linesTemplate){
-            if(line.contains("SPEC"))
+            if(line.contains("SPEC")){
                 indexToAdd = index;
+                break;
+            }
 
             index++;
         }
-        if(indexToAdd != -1)
-            linesTemplate.addAll(indexToAdd + 1 ,ControllerSpecLines(map));
-
+        if(indexToAdd != -1) {
+            linesTemplate.addAll(indexToAdd + 1, ControllerSpecLines(map));
+            linesTemplate.addAll(indexToAdd - 1,Fluents(map));
+            linesTemplate.addAll(indexToAdd - 1,GoalsAsserts(map));
+        }
         getLines().addAll(linesTemplate);
-        if(indexToAdd == -1)
+        if(indexToAdd == -1) {
+            lines.addAll(Fluents(map));
+            lines.addAll(GoalsAsserts(map));
             lines.addAll(ControllerSpec(map));
-
-        lines.addAll(ControllerDefinition());
+        }
+        //lines.addAll(ControllerDefinition());
 
     }
 
@@ -147,7 +151,7 @@ public class Model {
         fluentOn += "!";
         fluentOn = fluentOn.replace(",!","");
 
-        definition.add("fluent G[row:RRow][col:RCol] = <{arrive[row][col]}, Alphabet\\{arrive[row][col]}>");
+        //definition.add("fluent G[row:RRow][col:RCol] = <{arrive[row][col]}, Alphabet\\{arrive[row][col]}>");
         definition.add("fluent DangerZone = <{");
         definition.add(fluentOn);
         definition.add("}, Alphabet\\{");
