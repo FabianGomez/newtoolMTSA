@@ -21,7 +21,7 @@ public class Model {
         int indexToAdd = -1;
         int index = 0;
         for(String line: linesTemplate){
-            if(line.contains("SPEC")){
+            if(line.contains("controllerSpec")){
                 indexToAdd = index;
                 break;
             }
@@ -33,12 +33,25 @@ public class Model {
             linesTemplate.addAll(indexToAdd - 1,Fluents(map));
             linesTemplate.addAll(indexToAdd - 1,GoalsAsserts(map));
         }
+
         getLines().addAll(linesTemplate);
+
         if(indexToAdd == -1) {
-            lines.addAll(Fluents(map));
-            lines.addAll(GoalsAsserts(map));
-            lines.addAll(ControllerSpec(map));
+            index = 0;
+            for(String line: getLines()){
+                if(line.contains("controller")){
+                    indexToAdd = index;
+                    break;
+                }
+
+                index++;
+            }
+            getLines().addAll(indexToAdd - 1,ControllerSpec(map));
+            getLines().addAll(indexToAdd - 1,Fluents(map));
+            getLines().addAll(indexToAdd - 1,GoalsAsserts(map));
+
         }
+
         //lines.addAll(ControllerDefinition());
 
     }
