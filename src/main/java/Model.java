@@ -13,9 +13,6 @@ public class Model {
         lines.addAll(Size(map));
         lines.addAll(StartingPosition(map));
         lines.addAll(GoalsPosition(map));
-        //lines.addAll(DangerPosition(map));
-        //lines.addAll(Enviroment());
-
 
         List<String> linesTemplate = parseTemplate(FILENAME);
         int indexToAdd = -1;
@@ -51,8 +48,6 @@ public class Model {
             getLines().addAll(indexToAdd - 1,GoalsAsserts(map));
 
         }
-
-        //lines.addAll(ControllerDefinition());
 
     }
 
@@ -120,38 +115,7 @@ public class Model {
         }
         return definition;
     }
-    private static List<String> Enviroment()    {
-        List<String> definition = new LinkedList<String>();
-        definition.add("set Gotos = {{go}.{s,n,e,w}}");
-        definition.add("set Nodetour = {nodetour}");
-        definition.add("set Arrivals = {{arrive}.[row:RRow][col:RCol]}");
-        definition.add("set Detours = {{detour}.{s,n,e,w}}");
-        definition.add("set ControllableActions = {Gotos,Arrivals}");
-        definition.add("set UncontrollableActions = {Nodetour,Detours}");
-        definition.add("set Alphabet = {ControllableActions, UncontrollableActions}");
 
-
-        definition.add("GRID = POS[StartingRow][StartingColumn],");
-        definition.add("POS[row:RRow][col:RCol] =");
-        definition.add("    ( when (row<SizeRow) go.s-> GOING_TO[row+1][col]");
-        definition.add("    | when (col<SizeCol) go.e-> GOING_TO[row][col+1]");
-        definition.add("    | when (row>0) go.n -> GOING_TO[row-1][col]");
-        definition.add("    | when (col>0) go.w -> GOING_TO[row][col-1]),");
-
-        definition.add("GOING_TO[row:RRow][col:RCol] = ( nodetour -> arrive[row][col] -> POS[row][col]");
-        definition.add("    | when (row>0) detour.n -> arrive[row-1][col] -> POS[row-1][col]");
-        definition.add("    | when (row<SizeRow) detour.s -> arrive[row+1][col] -> POS[row+1][col]");
-        definition.add("    | when (col>0) detour.w ->  arrive[row][col-1] ->POS[row][col-1]");
-        definition.add("    | when (col<SizeCol) detour.e -> arrive[row][col+1] -> POS[row][col+1]");
-        definition.add(")+{Gotos,Arrivals,Detours,Nodetour}.");
-
-        definition.add("DRONE = ({Gotos}->USER),");
-        definition.add("USER = ({Nodetour,Detours}->ARRIVE),");
-        definition.add("ARRIVE = ({Arrivals}->DRONE).");
-        definition.add("||ENV = (GRID || DRONE).");
-
-        return definition;
-    }
     private static List<String> Fluents(Map map)    {
         List<String> definition = new LinkedList<String>();
 
@@ -170,15 +134,6 @@ public class Model {
         definition.add("}, Alphabet\\{");
         definition.add(fluentOn);
         definition.add("}>");
-        return definition;
-    }
-    private static List<String> SafeProperty(Map map)    {
-        List<String> definition = new LinkedList<String>();
-        if(map.getDangerCells().size()==0)
-            return  definition;
-
-        definition.add("ltl_property Safe = []((!DangerZone))");
-
         return definition;
     }
     private static List<String> GoalsAsserts(Map map)    {
@@ -232,36 +187,10 @@ public class Model {
 
         return definition;
     }
-    private static List<String> ControllerDefinition()    {
-        List<String> definition = new LinkedList<String>();
-        definition.add("controller ||C = (ENV)~{SPEC}.");
-        definition.add("||ANIMAR = (C || ENV).");
 
-        return definition;
-    }
 
     public List<String> getLines() {
         return lines;
     }
 
-    public void setLines(List<String> lines) {
-        this.lines = lines;
-    }
-
-     /*DEPRECATED
-    *
-    *
-    private static List<String> DangerPosition(Map map)    {
-        List<String> definition = new LinkedList<String>();
-        int index = 1;
-        for(DangerZone danger: map.dangerZones())
-        {
-            definition.add("range DangerZoneRows_" + index + " = " + danger.firstRow +".."+ danger.lastRow);
-            definition.add("range DangerZoneColumns_" + index + " = " + danger.firstColumn +".."+ danger.lastColumn);
-            index++;
-        }
-        return definition;
-    }
-    *
-    */
 }
