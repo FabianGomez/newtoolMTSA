@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.Inet4Address;
 import java.util.*;
 
 public class Model {
@@ -115,7 +114,6 @@ public class Model {
         }
         return definition;
     }
-
     private static List<String> Fluents(Map map)    {
         List<String> definition = new LinkedList<String>();
 
@@ -187,8 +185,6 @@ public class Model {
 
         return definition;
     }
-
-
     public List<String> getLines() {
         return lines;
     }
