@@ -77,7 +77,7 @@ public class ModelForm {
                     textAreaResult.setText("");
                     LTSInputString ltsinput = new LTSInputString(textAreaLTS.getText());
                     WindowOutput ltsoutput = new WindowOutput(textAreaResult);
-
+                    long start = System.currentTimeMillis();
                     LTSCompiler compiler = new LTSCompiler(ltsinput, ltsoutput, filename);
                     compiler.compile();
                     Hashtable cs = compiler.getComposites();
@@ -103,8 +103,8 @@ public class ModelForm {
                         JOptionPane.showMessageDialog(null, "No controller", "Error", 1, null);
                         return;
                     }
-
-                    JOptionPane.showMessageDialog(null, "Controller found", "Correct", 2, null);
+                    long elapsedTimeMillis = System.currentTimeMillis()-start;
+                    JOptionPane.showMessageDialog(null, "Controller found in "+ elapsedTimeMillis +" miliseconds.", "Correct", JOptionPane.PLAIN_MESSAGE, null);
 
                     /*CONTROLADOR = compiler.continueCompilation("ANIMAR");
                     TransitionSystemDispatcher.applyComposition(CONTROLADOR,ltsoutput);
