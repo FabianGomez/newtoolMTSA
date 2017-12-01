@@ -12,7 +12,8 @@ public class Model {
         lines.addAll(Size(map));
         lines.addAll(StartingPosition(map));
         lines.addAll(GoalsPosition(map));
-
+        lines.addAll(WallDefinition(map));
+        lines.addAll(DoorDefinition(map));
         List<String> linesTemplate = parseTemplate(FILENAME);
         int indexToAdd = -1;
         int index = 0;
@@ -26,8 +27,9 @@ public class Model {
         }
         if(indexToAdd != -1) {
             linesTemplate.addAll(indexToAdd + 1, ControllerSpecLines(map));
-            linesTemplate.addAll(indexToAdd - 1,Fluents(map));
-            linesTemplate.addAll(indexToAdd - 1,GoalsAsserts(map));
+            linesTemplate.addAll(indexToAdd - 1, DoorProperty(map));
+            linesTemplate.addAll(indexToAdd - 1, Fluents(map));
+            linesTemplate.addAll(indexToAdd - 1, GoalsAsserts(map));
         }
 
         getLines().addAll(linesTemplate);
@@ -43,6 +45,7 @@ public class Model {
                 index++;
             }
             getLines().addAll(indexToAdd - 1,ControllerSpec(map));
+            getLines().addAll(indexToAdd - 1,DoorProperty(map));
             getLines().addAll(indexToAdd - 1,Fluents(map));
             getLines().addAll(indexToAdd - 1,GoalsAsserts(map));
 
@@ -114,6 +117,37 @@ public class Model {
         }
         return definition;
     }
+    private static List<String> WallDefinition(Map map)    {
+        List<String> definition = new LinkedList<String>();
+        if(map.getWallCells().size() == 0)
+            return definition;
+        
+        String lineDefinition = "def Wall(row,col) = ";
+        for(WallCell cell: map.getWallCells())
+            lineDefinition += " row == " + cell.getRow() + " && col == " + cell.getColumn() + " || " ;
+        lineDefinition += "!";
+        lineDefinition = lineDefinition.replace("|| !","");
+
+        definition.add(lineDefinition);
+
+        return definition;
+
+    }
+    private static List<String> DoorDefinition(Map map)    {
+        List<String> definition = new LinkedList<String>();
+        if(map.getDoorCell() == null)
+            return definition;
+
+
+        String lineDefinition = "def DoorAndClosed(row,col,door) = ";
+        lineDefinition += " row == " + map.getDoorCell().getRow() + " && col == " + map.getDoorCell().getColumn() + " && door == 1  " ;
+
+
+        definition.add(lineDefinition);
+
+        return definition;
+
+    }
     private static List<String> Fluents(Map map)    {
         List<String> definition = new LinkedList<String>();
 
@@ -132,6 +166,17 @@ public class Model {
         definition.add("}, Alphabet\\{");
         definition.add(fluentOn);
         definition.add("}>");
+        return definition;
+    }
+    private static List<String> DoorProperty(Map map)    {
+        List<String> definition = new LinkedList<String>();
+        if(map.getDoorCell() == null)
+            return  definition;
+
+        definition.add("ltl_property DoorCorrectActionOpen = [] (open -> X((!open) W close))");
+        definition.add("ltl_property DoorCorrectActionClose =   [] (close -> X((!close) W open))");
+        definition.add("ltl_property DoorCorrectActionOrder = ((!close) W open)");
+
         return definition;
     }
     private static List<String> GoalsAsserts(Map map)    {
