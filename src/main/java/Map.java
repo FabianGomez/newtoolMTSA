@@ -12,16 +12,22 @@ public class Map {
     private InitialCell initialCell;
     private HashMap<Integer,List<GoalCell>> goalCells;
     private List<DangerCell> dangerCells;
+    private List<WallCell> wallCells;
+    private DoorCell doorCell;
 
     public Map(){
         this.goalCells = new HashMap<Integer,List<GoalCell>>();
         this.dangerCells = new LinkedList<DangerCell>();
+        this.wallCells = new LinkedList<WallCell>();
         this.columns = 0;
         this.rows = 0;
     }
 
     public void setInitialCell(InitialCell initialCell)    {
         this.initialCell = initialCell;
+    }
+    public void setDoorCell(DoorCell doorCell)    {
+        this.doorCell = doorCell;
     }
     public void addGoal(GoalCell goalCell) {
         if(getGoalCells().containsKey(goalCell.getValue()))
@@ -34,6 +40,10 @@ public class Map {
     }
     public void addDangerCell(DangerCell cell) {
         dangerCells.add(cell);
+    }
+
+    public void addWallCell(WallCell cell) {
+        wallCells.add(cell);
     }
 
     public Integer getRows() {
@@ -62,6 +72,14 @@ public class Map {
 
     public List<DangerCell> getDangerCells() {
         return dangerCells;
+    }
+
+    public List<WallCell> getWallCells() {
+        return wallCells;
+    }
+
+    public DoorCell getDoorCell() {
+        return doorCell;
     }
 
     public void saveTemp(){

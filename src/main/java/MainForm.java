@@ -25,13 +25,16 @@ public class MainForm {
     private JPanel buttonsPanel;
     private JPanel formPannel;
     private JButton clearButton;
+    private JButton wallButton;
+    private JButton doorButton;
     private JFrame frame;
 
     private static final int CLEAR = 0;
     private static final int ADDINGSTART = 1;
     private static final int ADDINGDANGER = 2;
     private static final int ADDINGGOAL = 3;
-
+    private static final int ADDINGWALL = 4;
+    private static final int ADDINGDOOR = 5;
     private int currentGoal;
 
     public static void main(String[] args) {
@@ -190,7 +193,26 @@ public class MainForm {
                 }
             }
         });
-
+        wallButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (currentAction == -1) {
+                    startChangeMap(ADDINGWALL, wallButton);
+                } else {
+                    wallButton.setBackground(startButton.getBackground());
+                    finishChangeMap();
+                }
+            }
+        });
+        doorButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (currentAction == -1) {
+                    startChangeMap(ADDINGDOOR, doorButton);
+                } else {
+                    doorButton.setBackground(startButton.getBackground());
+                    finishChangeMap();
+                }
+            }
+        });
 
     }
 
@@ -198,6 +220,8 @@ public class MainForm {
         clearButton.setEnabled(enabled);
         startButton.setEnabled(enabled);
         goalButton.setEnabled(enabled);
+        wallButton.setEnabled(enabled);
+        doorButton.setEnabled(enabled);
         dangerButton.setEnabled(enabled);
         buttonOpen.setEnabled(enabled);
         buttonGenerate.setEnabled(enabled);
@@ -233,12 +257,12 @@ public class MainForm {
         for(int indexRow = minRow ;  indexRow <= maxRow ; indexRow++){
             for(int indexColumn = minColumn ;  indexColumn <= maxColumn ; indexColumn++) {
                 CellPane actualCellPane = ((Grid) grid).getCell(indexRow, indexColumn);
+                Map map = ((Grid) grid).getMap();
                 switch (currentAction) {
                     case CLEAR:
                         actualCellPane.setCell(new EmptyCell(indexRow, indexColumn));
                         break;
                     case ADDINGSTART:
-                        Map map = ((Grid) grid).getMap();
                         if(map.getInitialCell() == null)
                             actualCellPane.setCell(new InitialCell(indexRow, indexColumn));
                         else
@@ -250,11 +274,21 @@ public class MainForm {
                     case ADDINGDANGER:
                         actualCellPane.setCell(new DangerCell(indexRow, indexColumn));
                         break;
+                    case ADDINGWALL:
+                        actualCellPane.setCell(new WallCell(indexRow, indexColumn));
+                        break;
+                    case ADDINGDOOR:
+                        if(map.getDoorCell() == null)
+                            actualCellPane.setCell(new DoorCell(indexRow, indexColumn));
+                        else
+                            JOptionPane.showMessageDialog(null, "There is a door cell", "Error", 1, null);
+                        break;
                 }
                 actualCellPane.paint();
                 if(currentAction == ADDINGSTART)
                     break;
-
+                if(currentAction == ADDINGDOOR)
+                    break;
             }
         }
 
