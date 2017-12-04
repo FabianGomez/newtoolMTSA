@@ -135,12 +135,14 @@ public class Model {
     }
     private static List<String> DoorDefinition(Map map)    {
         List<String> definition = new LinkedList<String>();
-        if(map.getDoorCell() == null)
-            return definition;
-
-
         String lineDefinition = "def DoorAndClosed(row,col,door) = ";
-        lineDefinition += " row == " + map.getDoorCell().getRow() + " && col == " + map.getDoorCell().getColumn() + " && door == 1  " ;
+        if(map.getDoorCell() == null) {
+            lineDefinition += " row == -1";
+            definition.add(lineDefinition);
+            return definition;
+        }
+
+        lineDefinition += " row == " + map.getDoorCell().getRow() + " && col == " + map.getDoorCell().getColumn() + " && door == 0  " ;
 
 
         definition.add(lineDefinition);
@@ -151,9 +153,10 @@ public class Model {
     private static List<String> Fluents(Map map)    {
         List<String> definition = new LinkedList<String>();
 
-        if(map.getDangerCells().size() == 0)
-            return  definition;
-
+        if(map.getDangerCells().size() == 0){
+            definition.add("fluent DangerZone = <{Alphabet}\\{Alphabet},{Alphabet}>");
+            return definition;
+        }
         String fluentOn = "";
         for(DangerCell cell: map.getDangerCells())
             fluentOn += "arrive["+ cell.getRow() +"]["+ cell.getColumn() +"] ,";
@@ -198,7 +201,10 @@ public class Model {
     }
     private static List<String> ControllerSpecLines(Map map)    {
         List<String> definition = new LinkedList<String>();
-        if(map.getDangerCells().size() > 0)
+
+        if(map.getDoorCell() != null)
+            definition.add("safety = {Safe,DoorCorrectActionOpen,DoorCorrectActionClose,DoorCorrectActionOrder}");
+        else
             definition.add("safety = {Safe}");
 
         definition.add("controllable = {ControllableActions}");
