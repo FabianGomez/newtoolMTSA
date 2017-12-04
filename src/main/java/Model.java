@@ -121,7 +121,7 @@ public class Model {
         List<String> definition = new LinkedList<String>();
         if(map.getWallCells().size() == 0)
             return definition;
-        
+
         String lineDefinition = "def Wall(row,col) = ";
         for(WallCell cell: map.getWallCells())
             lineDefinition += " row == " + cell.getRow() + " && col == " + cell.getColumn() + " || " ;

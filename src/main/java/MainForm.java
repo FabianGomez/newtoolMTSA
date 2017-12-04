@@ -70,43 +70,64 @@ public class MainForm {
 
                 if(e.getKeyCode() == KeyEvent.VK_ESCAPE && frame.isFocused())
                     frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+
+
+                if(e.getKeyCode() < 58 && e.getKeyCode() > 47)
+                    currentGoal = e.getKeyCode() - 48;
                 return false;
             }
         });
         buttonOpen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JFileChooser dialog = new JFileChooser();
-                int returnVal = dialog.showOpenDialog(buttonOpen);
+                try {
+                    JFileChooser dialog = new JFileChooser();
+                    int returnVal = dialog.showOpenDialog(buttonOpen);
 
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = dialog.getSelectedFile();
-                    panel1.setVisible(false);
-                    Map map = MapParser.parse(file.getAbsolutePath());
-                    panel1.remove(grid);
-                    grid = new Grid(map, true, MainForm.this);
-                    panel1.add(grid);
-                    panel1.setVisible(true);
-                    grid.setVisible(true);
-                    buttonsPanel.setVisible(true);
-                    ((JFrame) panel1.getTopLevelAncestor()).pack();
-                    ((JFrame) panel1.getTopLevelAncestor()).setLocationRelativeTo(null);
+                    if (returnVal == JFileChooser.APPROVE_OPTION) {
+                        File file = dialog.getSelectedFile();
+                        panel1.setVisible(false);
+                        Map map = MapParser.parse(file.getAbsolutePath());
+                        panel1.remove(grid);
+                        grid = new Grid(map, true, MainForm.this);
+                        panel1.add(grid);
+                        panel1.setVisible(true);
+                        grid.setVisible(true);
+                        buttonsPanel.setVisible(true);
+                        ((JFrame) panel1.getTopLevelAncestor()).pack();
+                        ((JFrame) panel1.getTopLevelAncestor()).setLocationRelativeTo(null);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", 1, null);
                 }
+
             }
         });
 
         buttonGenerate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (grid.getClass() != Grid.class) {
-                    JOptionPane.showMessageDialog(null, "There is not map to generate", "Error", 1, null);
-                    return;
-                }
-                Map map = ((Grid) grid).getMap();
-                JFileChooser dialog = new JFileChooser();
-                int returnVal = dialog.showOpenDialog(buttonOpen);
+                try{
+                    if (grid.getClass() != Grid.class) {
+                        JOptionPane.showMessageDialog(null, "There is not map to generate", "Error", 1, null);
+                        return;
+                    }
 
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = dialog.getSelectedFile();
-                    ModelForm form = new ModelForm(map, file.getAbsolutePath());
+                    Map map = ((Grid) grid).getMap();
+                    if (map.getInitialCell() == null) {
+                        JOptionPane.showMessageDialog(null, "There is not initial cell", "Error", 1, null);
+                        return;
+                    }
+
+                    JFileChooser dialog = new JFileChooser();
+                    int returnVal = dialog.showOpenDialog(buttonOpen);
+
+                    if (returnVal == JFileChooser.APPROVE_OPTION) {
+                        File file = dialog.getSelectedFile();
+                        ModelForm form = new ModelForm(map, file.getAbsolutePath());
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", 1, null);
                 }
             }
         });
@@ -149,6 +170,8 @@ public class MainForm {
                         map.save(file.getAbsolutePath());
                     }
                 } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", 1, null);
                 }
             }
         });

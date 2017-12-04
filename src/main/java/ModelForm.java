@@ -106,10 +106,8 @@ public class ModelForm {
                     long elapsedTimeMillis = System.currentTimeMillis()-start;
                     JOptionPane.showMessageDialog(null, "Controller found in "+ elapsedTimeMillis +" miliseconds.", "Correct", JOptionPane.PLAIN_MESSAGE, null);
 
-                    /*CONTROLADOR = compiler.continueCompilation("ANIMAR");
-                    TransitionSystemDispatcher.applyComposition(CONTROLADOR,ltsoutput);
-                    */
                 }catch (Exception ex){
+                    ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", 1, null);
                 }
             }
@@ -129,7 +127,10 @@ public class ModelForm {
                             writer.println(line);
                         writer.close();
                     }
-                }catch (Exception ex){}
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", 1, null);
+                }
             }
         });
 
@@ -173,7 +174,10 @@ public class ModelForm {
                     }else{
                         JOptionPane.showMessageDialog(null, "There is no controller done", "Error", 1, null);
                     }
-                }catch (Exception ex){}
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", 1, null);
+                }
             }
         });
     }
