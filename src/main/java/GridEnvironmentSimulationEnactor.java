@@ -1,9 +1,6 @@
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.Enactor;
 import MTSAEnactment.ar.uba.dc.lafhis.enactment.TransitionEvent;
 
-import javax.swing.*;
-import java.awt.event.WindowEvent;
-
 
 /**
  * Created by lnahabedian on 18/07/16.
@@ -20,7 +17,7 @@ public class GridEnvironmentSimulationEnactor<State, Action> extends
 
     public final static String ENACTORNAME = "GridSimulationEnactor";
 
-    private GridEnviromentSimulationUI simulationWindow;
+    private GridEnvironmentSimulationUI simulationWindow;
 
     public GridEnvironmentSimulationEnactor(String name, Action goE, Action goW, Action goN, Action goS, Action detourE, Action detourW, Action detourN, Action detourS, Action nodetour, Action arrive) {
         super(name);
@@ -72,7 +69,7 @@ public class GridEnvironmentSimulationEnactor<State, Action> extends
     @Override
     public void setUp() {
         System.out.println("SET UP");
-        simulationWindow = new GridEnviromentSimulationUI();
+        simulationWindow = new GridEnvironmentSimulationUI();
     }
 
     @Override

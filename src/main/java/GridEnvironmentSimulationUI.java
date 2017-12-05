@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class GridEnviromentSimulationUI extends JFrame {
+public class GridEnvironmentSimulationUI extends JFrame {
     private JPanel gridPanel;
     private JFrame frame;
     Grid grid;
@@ -14,7 +14,7 @@ public class GridEnviromentSimulationUI extends JFrame {
     private static final Color ACTUALCOLOR =  Color.orange;
 
 
-    public GridEnviromentSimulationUI(){
+    public GridEnvironmentSimulationUI(){
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
