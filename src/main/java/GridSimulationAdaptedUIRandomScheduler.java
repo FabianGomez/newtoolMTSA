@@ -25,7 +25,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 	private final static double VELOCITYSLOW = 0.5;
 	private final static double VELOCITYNORMAL = 0.1;
 	private final static double VELOCITYFAST = 0.002;
-	private final static double VELOCITYTOOFAST = 0.0004;
+	private final static double VELOCITYFASTER = 0.0004;
 
 	private JComboBox velocityList;
 	private KeyEventDispatcher keyEventDispatcher;
@@ -48,7 +48,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 		uiControllerGui = new UIControllerGui();
 		uiControllerGui.setTitle(this.getName());
 
-		String[] velocityStrings = { "SLOW", "NORMAL", "FAST", "TOOFAST" };
+		String[] velocityStrings = { "SLOW", "NORMAL", "FAST", "FASTER" };
 		velocityList = new JComboBox(velocityStrings);
 		velocityList.setSelectedIndex(1);
 
@@ -162,7 +162,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 			case 2:
 				return GridSimulationAdaptedUIRandomScheduler.VELOCITYFAST;
 			case 3:
-				return GridSimulationAdaptedUIRandomScheduler.VELOCITYTOOFAST;
+				return GridSimulationAdaptedUIRandomScheduler.VELOCITYFASTER;
 		}
 		return GridSimulationAdaptedUIRandomScheduler.VELOCITYNORMAL;
 	}
