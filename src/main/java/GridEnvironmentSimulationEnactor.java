@@ -11,25 +11,25 @@ public class GridEnvironmentSimulationEnactor<State, Action> extends
     // controllable
     private Action goE, goW, goN, goS, arrive;
     // uncontrollable
-    private Action detourE, detourW, detourN, detourS;
-    private Action nodetour;
+    private Action windE, windW, windN, windS;
+    private Action nowind;
 
 
     public final static String ENACTORNAME = "GridSimulationEnactor";
 
     private GridEnvironmentSimulationUI simulationWindow;
 
-    public GridEnvironmentSimulationEnactor(String name, Action goE, Action goW, Action goN, Action goS, Action detourE, Action detourW, Action detourN, Action detourS, Action nodetour, Action arrive) {
+    public GridEnvironmentSimulationEnactor(String name, Action goE, Action goW, Action goN, Action goS, Action windE, Action windW, Action windN, Action windS, Action nowind, Action arrive) {
         super(name);
         this.goE = goE;
         this.goW = goW;
         this.goN = goN;
         this.goS = goS;
-        this.detourE = detourE;
-        this.detourW = detourW;
-        this.detourN = detourN;
-        this.detourS = detourS;
-        this.nodetour = nodetour;
+        this.windE = windE;
+        this.windW = windW;
+        this.windN = windN;
+        this.windS = windS;
+        this.nowind = nowind;
         this.arrive = arrive;
     }
 
@@ -44,15 +44,15 @@ public class GridEnvironmentSimulationEnactor<State, Action> extends
             moveTo(-1,0);
         } else if (transitionEvent.getAction().equals(goS)) {
             moveTo(1,0);
-        } else if (transitionEvent.getAction().equals(detourE)) {
+        } else if (transitionEvent.getAction().equals(windE)) {
             moveTo(0,1);
-        } else if (transitionEvent.getAction().equals(detourW)) {
+        } else if (transitionEvent.getAction().equals(windW)) {
             moveTo(0,-1);
-        } else if (transitionEvent.getAction().equals(detourN)) {
+        } else if (transitionEvent.getAction().equals(windN)) {
             moveTo(-1,0);
-        } else if (transitionEvent.getAction().equals(detourS)) {
+        } else if (transitionEvent.getAction().equals(windS)) {
             moveTo(1,0);
-        } else if (transitionEvent.getAction().equals(nodetour)) {
+        } else if (transitionEvent.getAction().equals(nowind)) {
             moveTo(0,0);
         }
 

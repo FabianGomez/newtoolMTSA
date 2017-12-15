@@ -84,19 +84,19 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 				int keyCode = e.getKeyCode();
 				switch( keyCode ) {
 					case KeyEvent.VK_UP:
-						action = "detour.n";
+						action = "wind.n";
 						break;
 					case KeyEvent.VK_DOWN:
-						action = "detour.s";
+						action = "wind.s";
 						break;
 					case KeyEvent.VK_LEFT:
-						action = "detour.w";
+						action = "wind.w";
 						break;
 					case KeyEvent.VK_RIGHT :
-						action = "detour.e";
+						action = "wind.e";
 						break;
 					case KeyEvent.VK_SPACE :
-						action = "nodetour";
+						action = "nowind";
 						break;
 				}
 
@@ -126,7 +126,7 @@ public class GridSimulationAdaptedUIRandomScheduler<State, Action> extends UIRan
 						sleep(0,1);
 						seconds += 0.0001 ;
 						if(seconds >= getVELOCITY()){
-							fireAction("nodetour");
+							fireAction("nowind");
 							return;
 						}
 

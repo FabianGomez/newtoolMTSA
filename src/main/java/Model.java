@@ -207,8 +207,6 @@ public class Model {
         else
             definition.add("safety = {Safe}");
 
-        definition.add("controllable = {ControllableActions}");
-
         String liveness = "liveness = {";
 
         List<Integer> goalIds = new LinkedList<Integer>();
@@ -225,7 +223,7 @@ public class Model {
         liveness += "}";
         liveness = liveness.replace(",}","}");
         definition.add(liveness);
-
+        definition.add("controllable = {ControllableActions}");
         return definition;
     }
     private static List<String> ControllerSpec(Map map)    {
