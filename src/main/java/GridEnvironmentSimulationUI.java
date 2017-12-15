@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GridEnvironmentSimulationUI extends JFrame {
@@ -8,13 +10,15 @@ public class GridEnvironmentSimulationUI extends JFrame {
     Grid grid;
 
     CellPane actual;
-    CellPane startingToMove;
+    List<CellPane> actuals;
+
 
     private static final Color STARTINGCOLOR =  Color.orange;
     private static final Color ACTUALCOLOR =  Color.orange;
 
 
     public GridEnvironmentSimulationUI(){
+    actuals = new ArrayList<>();
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -27,8 +31,7 @@ public class GridEnvironmentSimulationUI extends JFrame {
                 Map map = MapParser.parse(Map.TEMPPATH);
                 grid = new Grid(map,false, null);
                 actual = grid.getCell(map.getInitialCell().getRow(), map.getInitialCell().getColumn());
-                startingToMove(0,0);
-                finishingToMove(0,0);
+                moveTo(0,0);
                 gridPanel = grid;
                 frame.add(gridPanel);
                 frame.pack();
@@ -46,25 +49,28 @@ public class GridEnvironmentSimulationUI extends JFrame {
         repaint();
     }
 
-    public void startingToMove(int vertical, int horizontal){
+
+    public void moveTo(int vertical, int horizontal){
         if(actual == null)
             return;
 
         actual.endMomentarilyPaint();
-        startingToMove = grid.getCell(  actual.getCell().getRow() + vertical, actual.getCell().getColumn() + horizontal);
-        startingToMove.startMomentarilyPaint(STARTINGCOLOR);
-    }
 
-    public void finishingToMove(int vertical, int horizontal){
-        if(startingToMove == null)
-            return;
-
-        startingToMove.endMomentarilyPaint();
-        actual = grid.getCell(startingToMove.getCell().getRow()+ vertical, startingToMove.getCell().getColumn()+ horizontal);
+        actual = grid.getCell(actual.getCell().getRow()+ vertical, actual.getCell().getColumn()+ horizontal);
         actual.startMomentarilyPaint(ACTUALCOLOR);
+        clearAll(actuals);
+        actuals.add(actual);
     }
 
     public void tearDown() {
         frame.dispose();
+    }
+
+    private void clearAll(List<CellPane> list){
+        for(CellPane cell : list)
+            if(actual == null)
+                cell.endMomentarilyPaint();
+
+        list.clear();
     }
 }

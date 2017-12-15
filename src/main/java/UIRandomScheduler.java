@@ -23,7 +23,7 @@ public class UIRandomScheduler<State, Action> extends BaseController<State, Acti
 	public UIControllerGui uiControllerGui = null;
 	private Logger logger = LogManager.getLogger(RandomController.class.getName());
 	public List<Action> optUnControllableActions;
-
+	private boolean tearDown = false;
 	public UIRandomScheduler(String name, LTS<State, Action> lts,
                              Set<Action> controllableActions) {
 		super(name, lts, controllableActions);
@@ -114,6 +114,9 @@ public class UIRandomScheduler<State, Action> extends BaseController<State, Acti
 		int randomPos = (int) (Math.random() * availables.size());
 		Action nextAction = availables.get(randomPos).getFirst();
 
+		if(tearDown)
+			return;
+
 		this.uiControllerGui.appendMessage("Fire controllable action: " +  nextAction.toString() );
 		logger.info("UIRandomScheduler takeNextAction " + nextAction.toString()  + " out of " + availablesActions);
 
@@ -123,8 +126,11 @@ public class UIRandomScheduler<State, Action> extends BaseController<State, Acti
 
 	private void updateInterface()
 	{
-		if (this.uiControllerGui == null) 
+		if (this.uiControllerGui == null)
 		{
+			if(tearDown)
+				return;
+
 			this.uiControllerGui = new UIControllerGui();
 			this.uiControllerGui.setTitle(this.getName());
 		}
@@ -176,6 +182,7 @@ public class UIRandomScheduler<State, Action> extends BaseController<State, Acti
 	
 	@Override
 	public void tearDown() {
+		tearDown = true;
 		this.uiControllerGui.dispose();
 		this.uiControllerGui.setVisible(false);
 		this.uiControllerGui = null;
